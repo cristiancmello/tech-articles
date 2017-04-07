@@ -58,7 +58,7 @@ Algumas APIs REST também são expostas aos aplicativos móveis usados pelos mot
 ### Arquitetura de Microserviço e o Cubo de Escalabilidade
 O padrão de **Arquitetura de Microserviços** corresponde ao **eixo Y** no **Cubo de Escalabilidade** (*Scale Cube*), que é um modelo 3D de escalabilidade do livro *The Art of Scalability*. Os outros eixos de dimensionamento são escalonamento de **eixo X**, que consiste em várias cópias idênticas do aplicativo por trás de um balanceador de carga e o escalonamento de **eixo Z** (ou particionamento de dados), onde um atributo da solicitação (como chave-primária) é  usado para encaminhar a solicitação para um servidor específico.
 
-<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-3.png" width="500" height="500">
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-2.png" width="500" height="500">
 
 As aplicaçes costumam utilizar os três tipos de escalonamento em conjunto:
 * **Eixo Y**: decompõe a aplicação em microserviços;
