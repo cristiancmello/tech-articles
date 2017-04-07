@@ -22,3 +22,11 @@ A medida que a aplicação cresce ao longo do tempo, a abordagem monolítica com
 Uma vez que a aplicação e tornou grande e complexa, a organização de desenvolvimento provavelmente estará cheia de atrasos e muito sacrifício. Quaisquer tentativas de desenvolvimento ágil e entrega serão a um grande custo. Entender o relacionamento entre as partes do sistema também será muito difícil, o que acarreta em correções de bugs mais demoradas e com milhares de efeitos colaterais indesejados.
 
 Se a base de código for difícil de entender, as alterações não serão feitas corretamente. Logo, acabaremos numa enorme bola de lama.
+
+Outro problema da aplicação será a dimensão do consumo de recursos. Quanto maior o aplicativo, maior o tempo de inicialização. Em uma pesquisa recente (fonte??), alguns desenvolvedores relataram tempo de inicialização de até 12 minutos. Já se foi noticiado inicializações maiores do que 40 minutos. Isso acarreta em desperdício de tempo em razão da demora ao se operar regularmente a aplicação.
+
+Em relação à implantação contínua, a aplicação monolítica grande e complexa será um obstáculo. Hoje, o estado da arte para aplicações SaaS (Software como serviço) é se realizar deploys em produção muitas vezes ao dia. Tomando como base uma aplicação monolítica complexa, isso sera extremamente difícil de fazer, requerendo, muita vezes, extensos testes manuais.
+
+Outra problemática trazida pelas aplicações monolíticas, é na dificuldade em escalonamento quando é preciso diferentes módulos que exigem recursos computacionais conflitantes. Exemplo: um módulo pode implementar um lógica de processamento de imagem com uso intensivo de CPU e idealmente ser implantado em instâncias otimizadas da AWS. Outro módulo pode ser um banco de dados em memória e mais adequado para instâncias EC2 otimizadas para a memória. Como os módulos foram implementados juntos, a escolha de hardware foi comprometida.
+
+A confiabilidade em aplicações monolíticas também é outro problema. Como todos os módulos estão sendo executados no mesmo processo, um bug em qualquer módulo, como vazamento de memória, tem o poder em congelar a aplicação.
