@@ -45,4 +45,7 @@ Cada microserviço é uma mini-aplicação que tem sua própria arquitetura mono
 
 Abaixo, há uma possível decomposição funcional da aplicação:
 
-<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-0.png" width="500" height="500">
+<center>
+  <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-0.png" width="500" height="500">
+</center>
+
