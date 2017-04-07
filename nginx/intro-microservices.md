@@ -57,3 +57,21 @@ Algumas APIs REST também são expostas aos aplicativos móveis usados pelos mot
 
 ### Arquitetura de Microserviço e o Cubo de Escalabilidade
 O padrão de **Arquitetura de Microserviços** corresponde ao **eixo Y** no **Cubo de Escalabilidade** (*Scale Cube*), que é um modelo 3D de escalabilidade do livro *The Art of Scalability*. Os outros eixos de dimensionamento são escalonamento de **eixo X**, que consiste em várias cópias idênticas do aplicativo por trás de um balanceador de carga e o escalonamento de **eixo Z** (ou particionamento de dados), onde um atributo da solicitação (como chave-primária) é  usado para encaminhar a solicitação para um servidor específico.
+
+As aplicaçes costumam utilizar os três tipos de escalonamento em conjunto:
+* **Eixo Y**: decompõe a aplicação em microserviços;
+* **Eixo X**: em tempo de execução, executa várias instâncias (clones) de cada serviço atrás de um balanceador de carga (*load balancer*);
+* **Eixo Z**: usado por algumas aplicações para particionar serviços, como Banco de Dados.
+
+A seguir, um exemplo de serviço de **Gerência de Viagem** implementado com o Docker na AWS EC2.
+
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-2.png" width="500" height="400">
+
+### Relação da Arquitetetura de Microserviço e o Banco de Dados
+A Arquitetura de Microserviço afeta significativamente a relação entre o aplicativo e o banco de dados. Em vez de compartilhar um único esquema do BD com outros serviços, cada serviço tem seu próprio esquema do Banco de Dados. Por um lado, esta abordagem está em desacordo com a ideia de um modelo de dados de toda a empresa. Além disso, muitas vezes resulta na duplicação de alguns dados. No entanto, ter um esquema de Banco de Dados por serviço é essencial se você quiser se beneficiar de microservices, porque garante acoplamento frouxo. O diagrama a seguir mostra a arquitetura do BD para o aplicativo de exemplo.
+
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-4.png">
+
+Cada um dos servços tem seu próprio Banco de Dados. Além disso, um serviço pode usar um tipo de BD que é mais adequado às suas necessidades, a chamada **Arquitetura de Persistência Polyglot**. Por exemplo, a Gestão de Corridas, que localiza drivers próximos a um passageiro em potencial, deve usar um Banco de Dados que ofereça suporte a geo-consultas eficientes.
+
+Há também muita semelhança entre a Arquitetura de Microserviços com o **SOA** (**Orientado a Serviços**). Ambas as abordagens consistem num conjunto de serviços. A diferença entre as duas arquiteturas consiste que o SOA tem caráter comercial (geralmente atrelado a uma tecnologia específica fornecida por uma única empresa como um "pacote"), além de uma especificação como um Web Service (WSDL, SOAP e etc) e um ESB (Enterprise Service Bus). As aplicações baseadas em Microservices favorecem protocolos mais simples e leves, como o REST, ao invs de Web Service. O padrão de Microserviço rejeita outras partes do SOA, como o conceito deum esquema canônico.
