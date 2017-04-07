@@ -49,3 +49,8 @@ Abaixo, há uma possível decomposição funcional da aplicação:
   <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-0.png" width="500" height="500">
 </centered>
 
+Cada área funcional da aplicação é agora implementada por seu próprio microserviço. Além disso, a aplicação Web é dividida em um conjunto de aplicações Web mai simples (como uma para passageiros e outro para motoristas). Isso facilita a implantação de experiências distintas para usuários específicos, dispositivos ou casos de uso especializados.
+
+Cada serviço de backend expõe uma API REST e a maioria dos serviços consome APIs fornecidas por outros serviços. Por exemplo, o **Gerenciamento de Drivers** usa o servidor de notificação para informar um driver disponível sobre uma possivel viagem. Os serviços de interface do usuário invocam os outro serviços para renderizar páginas Web. Os serviços também podem usar comunicação assíncrona baseada em mensagens. A comunicação entre serviços será abordada mais detalhadamente em outro capítulo.
+
+Algumas APIs REST também são expostas aos aplicativos móveis usados pelos motoristas e passageiros. As aplicaçes, no entanto, não tem acesso direto aos serviços de backend. Em vez disso, a comunicação é intermediada por um componente chamado **API Gateway**. O API Gateway é responsável por tarefas como balanceamento de carga, cache, controle de acesso, medição de API e monitoramento, e **pode ser implementado efetivamente usando o NGINX**. Capítulos posteriores irão cobrir o API Gateway.
