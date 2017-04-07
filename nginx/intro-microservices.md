@@ -31,4 +31,17 @@ Outra problemática trazida pelas aplicações monolíticas, é na dificuldade e
 
 A confiabilidade em aplicações monolíticas também é outro problema. Como todos os módulos estão sendo executados no mesmo processo, um bug em qualquer módulo, como vazamento de memória, tem o poder de congelar a aplicação inteira.
 
-Um último ponto desfavorável à abordagem de microarquitetura, é a dificuldade em adoção de novas tecnologias e frameworks mais modernas. Além disso, novos desenvolvedores necessitarão de um maior tempo de treinamento na tecnologia de implantação e encontrarão muitas resistências ao se propor mudanças na aplicação. 
+Um último ponto desfavorável à abordagem de microarquitetura, é a dificuldade em adoção de novas tecnologias e frameworks mais modernas. Além disso, novos desenvolvedores necessitarão de um maior tempo de treinamento na tecnologia de implantação e encontrarão muitas resistências ao se propor mudanças na aplicação.
+
+## Microservices - enfrentando a complexidade
+Muitas organizações, como **Amazon**, **eBay** e **Netflix**, resolveram esse problema utilizando a abordagem do padrão do Microservices. Em vez de construir uma única aplicação monstruosa e monolítica, a ideia é dividir a aplicação em um conjunto de serviços menores e interconectados.
+
+Um serviço tipicamente implementa um conjunto de funcionalidades, tais como:
+* **Gestão de Clientes**;
+* **Gestão de Pedidos**;
+* ...
+
+Cada microserviço é uma mini-aplicação que tem sua própria arquitetura monolítica que consiste em lógica de negócio juntamente com vários adaptadores. Alguns microservices exporiam uma API (Interface de Programação de Aplicação) que é consumida por outros microservices ou pelos clientes da aplicação. Outros microservices podem implementar uma interface da Web. Em tempo de execução, cada instância é geralmente uma nuvem em VM (Máquina Virtual) ou container do Docker.
+
+Abaixo, há uma possível decomposição funcional da aplicação:
+
