@@ -70,7 +70,7 @@ A seguir, um exemplo de serviço de **Gerência de Viagem** implementado com o D
 ### Relação da Arquitetetura de Microserviço e o Banco de Dados
 A Arquitetura de Microserviço afeta significativamente a relação entre o aplicativo e o banco de dados. Em vez de compartilhar um único esquema do BD com outros serviços, cada serviço tem seu próprio esquema do Banco de Dados. Por um lado, esta abordagem está em desacordo com a ideia de um modelo de dados de toda a empresa. Além disso, muitas vezes resulta na duplicação de alguns dados. No entanto, ter um esquema de Banco de Dados por serviço é essencial se você quiser se beneficiar de microservices, porque garante acoplamento frouxo. O diagrama a seguir mostra a arquitetura do BD para o aplicativo de exemplo.
 
-<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-4.png">
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-4.png" width="500" height="500">
 
 Cada um dos servços tem seu próprio Banco de Dados. Além disso, um serviço pode usar um tipo de BD que é mais adequado às suas necessidades, a chamada **Arquitetura de Persistência Polyglot**. Por exemplo, a Gestão de Corridas, que localiza drivers próximos a um passageiro em potencial, deve usar um Banco de Dados que ofereça suporte a geo-consultas eficientes.
 
