@@ -29,4 +29,6 @@ Em relação à implantação contínua, a aplicação monolítica grande e comp
 
 Outra problemática trazida pelas aplicações monolíticas, é na dificuldade em escalonamento quando é preciso diferentes módulos que exigem recursos computacionais conflitantes. Exemplo: um módulo pode implementar um lógica de processamento de imagem com uso intensivo de CPU e idealmente ser implantado em instâncias otimizadas da AWS. Outro módulo pode ser um banco de dados em memória e mais adequado para instâncias EC2 otimizadas para a memória. Como os módulos foram implementados juntos, a escolha de hardware foi comprometida.
 
-A confiabilidade em aplicações monolíticas também é outro problema. Como todos os módulos estão sendo executados no mesmo processo, um bug em qualquer módulo, como vazamento de memória, tem o poder em congelar a aplicação.
+A confiabilidade em aplicações monolíticas também é outro problema. Como todos os módulos estão sendo executados no mesmo processo, um bug em qualquer módulo, como vazamento de memória, tem o poder de congelar a aplicação inteira.
+
+Um último ponto desfavorável à abordagem de microarquitetura, é a dificuldade em adoção de novas tecnologias e frameworks mais modernas. Além disso, novos desenvolvedores necessitarão de um maior tempo de treinamento na tecnologia de implantação e encontrarão muitas resistências ao se propor mudanças na aplicação. 
