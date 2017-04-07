@@ -46,7 +46,7 @@ Cada microserviço é uma mini-aplicação que tem sua própria arquitetura mono
 Abaixo, há uma possível decomposição funcional da aplicação:
 
 <centered>
-  <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-0.png" width="500" height="500">
+  <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-1.png" width="500" height="500">
 </centered>
 
 Cada área funcional da aplicação é agora implementada por seu próprio microserviço. Além disso, a aplicação Web é dividida em um conjunto de aplicações Web mai simples (como uma para passageiros e outro para motoristas). Isso facilita a implantação de experiências distintas para usuários específicos, dispositivos ou casos de uso especializados.
@@ -58,6 +58,8 @@ Algumas APIs REST também são expostas aos aplicativos móveis usados pelos mot
 ### Arquitetura de Microserviço e o Cubo de Escalabilidade
 O padrão de **Arquitetura de Microserviços** corresponde ao **eixo Y** no **Cubo de Escalabilidade** (*Scale Cube*), que é um modelo 3D de escalabilidade do livro *The Art of Scalability*. Os outros eixos de dimensionamento são escalonamento de **eixo X**, que consiste em várias cópias idênticas do aplicativo por trás de um balanceador de carga e o escalonamento de **eixo Z** (ou particionamento de dados), onde um atributo da solicitação (como chave-primária) é  usado para encaminhar a solicitação para um servidor específico.
 
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-3.png" width="500" height="500">
+
 As aplicaçes costumam utilizar os três tipos de escalonamento em conjunto:
 * **Eixo Y**: decompõe a aplicação em microserviços;
 * **Eixo X**: em tempo de execução, executa várias instâncias (clones) de cada serviço atrás de um balanceador de carga (*load balancer*);
@@ -65,7 +67,7 @@ As aplicaçes costumam utilizar os três tipos de escalonamento em conjunto:
 
 A seguir, um exemplo de serviço de **Gerência de Viagem** implementado com o Docker na AWS EC2.
 
-<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-2.png" width="500" height="400">
+<img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/nginx-article-3.png" width="500" height="400">
 
 ### Relação da Arquitetetura de Microserviço e o Banco de Dados
 A Arquitetura de Microserviço afeta significativamente a relação entre o aplicativo e o banco de dados. Em vez de compartilhar um único esquema do BD com outros serviços, cada serviço tem seu próprio esquema do Banco de Dados. Por um lado, esta abordagem está em desacordo com a ideia de um modelo de dados de toda a empresa. Além disso, muitas vezes resulta na duplicação de alguns dados. No entanto, ter um esquema de Banco de Dados por serviço é essencial se você quiser se beneficiar de microservices, porque garante acoplamento frouxo. O diagrama a seguir mostra a arquitetura do BD para o aplicativo de exemplo.
