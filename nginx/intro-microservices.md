@@ -76,4 +76,15 @@ A Arquitetura de Microserviço afeta significativamente a relação entre o apli
 
 Cada um dos servços tem seu próprio Banco de Dados. Além disso, um serviço pode usar um tipo de BD que é mais adequado às suas necessidades, a chamada **Arquitetura de Persistência Polyglot**. Por exemplo, a Gestão de Corridas, que localiza drivers próximos a um passageiro em potencial, deve usar um Banco de Dados que ofereça suporte a geo-consultas eficientes.
 
-Há também muita semelhança entre a Arquitetura de Microserviços com o **SOA** (**Orientado a Serviços**). Ambas as abordagens consistem num conjunto de serviços. A diferença entre as duas arquiteturas consiste que o SOA tem caráter comercial (geralmente atrelado a uma tecnologia específica fornecida por uma única empresa como um "pacote"), além de uma especificação como um Web Service (WSDL, SOAP e etc) e um ESB (Enterprise Service Bus). As aplicações baseadas em Microservices favorecem protocolos mais simples e leves, como o REST, ao invs de Web Service. O padrão de Microserviço rejeita outras partes do SOA, como o conceito deum esquema canônico.
+Há também muita semelhança entre a Arquitetura de Microserviços com o **SOA** (**Orientado a Serviços**). Ambas as abordagens consistem num conjunto de serviços. A diferença entre as duas arquiteturas consiste que o SOA tem caráter comercial (geralmente atrelado a uma tecnologia específica fornecida por uma única empresa como um "pacote"), além de uma especificação como um Web Service (WSDL, SOAP e etc) e um ESB (Enterprise Service Bus). As aplicações baseadas em Microservices favorecem protocolos mais simples e leves, como o REST, ao invés de Web Service. O padrão de Microserviço rejeita outras partes do SOA, como o conceito de um esquema canônico.
+
+## Os Benefícios dos Microserviços
+O padrão de Microservices tem uma série de benefícios importantes. Primeiro, aborda o problema da complexidade. Ele decompõe o que de outro forma seria uma monstruosa aplicação monolítica em conjunto de serviços. Embora a quantidade total de funcionalidade seja inalterada, o aplicativo foi dividido em blocos ou serviços gerenciáveis. Cada serviço tem um limite bem definido na forma de um RPC (Chamada à Procedimento Remoto) ou API message-driven. O padrão de arquitetura de Microservices impõe um nível de modularidade que na prática é extremamente difícil de alcançar com uma base de código monolítico. Consequentemente, os serviços individuais são muito mais rápidos para desenvolver e muito mais fáceis de entender e manter.
+
+Outras considerações:
+* Cada serviço pode ser desenvolvido por equipes independentes;
+* Desenvolvedores livres para escolherem qualquer tecnologia, desde que honre o contrato da API;
+* Como serviços são relativamente pequenos, torna-se possível reescrever um serviço antigo usando a tecnologia atual.
+* Cada serviço pode ser implantado de forma independente;
+* É possível realizar a implantação contínua de maneira mais rápida.
+* **Cada serviço pode ser dimensionado de forma independente**. Isto é, pode ser satisfeito de acordo com um hardware específico que melhor corresponda aos requisitos de um serviço.
