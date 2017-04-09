@@ -121,7 +121,7 @@ Cada serviço de backend (lado servidor) expõe uma API REST e a maioria
 dos serviços consome APIs fornecidas por outros serviços. Por exemplo, 
 o **Gerenciamento de Corridas** usa o servidor de notificação para 
 informar uma corrida disponível. Os serviços de interface do usuário 
-invocam os outro serviços para renderizar páginas Web. Os serviços 
+invocam os outros serviços para renderizar páginas Web. Os serviços 
 também podem usar comunicação assíncrona baseada em mensagens. 
 A comunicação entre serviços será abordada mais detalhadamente em 
 outro capítulo.
