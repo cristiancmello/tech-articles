@@ -127,7 +127,7 @@ A comunicação entre serviços será abordada mais detalhadamente em
 outro capítulo.
 
 Algumas APIs REST também são expostas aos aplicativos móveis usados 
-pelos motoristas e passageiros. As aplicaçes, no entanto, não tem 
+pelos motoristas e passageiros. As aplicações, no entanto, não tem 
 acesso direto aos serviços de backend. Em vez disso, a comunicação 
 é intermediada por um componente chamado **API Gateway**. 
 O API Gateway é responsável por tarefas como balanceamento de carga, 
@@ -137,7 +137,7 @@ irão cobrir o API Gateway.
 
 ### Arquitetura de Microserviço e o Cubo da Escalabilidade
 O padrão de **Arquitetura de Microserviços** corresponde ao **eixo Y** 
-no **Cubo da Escalabilidade** (*Scale Cube*), que é um modelo 3D 
+no **Cubo da Escalabilidade** (*Scale Cube*), que é um modelo 3D de
 escalabilidade do livro *The Art of Scalability*. Os outros eixos 
 de dimensionamento são escalonamento de **eixo X**, que consiste 
 em várias cópias idênticas do aplicativo por trás de um balanceador 
@@ -149,9 +149,9 @@ encaminhar a solicitação para um servidor específico.
     <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/intro-microservices/nginx-article-2.png" width="500" height="380">
 </p>
 
-As aplicaçes costumam utilizar os três tipos de escalonamento em conjunto:
-* **Eixo Y**: decompõe a aplicação em microserviços;
-* **Eixo X**: em tempo de execução, executa várias instâncias (clones) 
+As aplicações costumam utilizar os três tipos de escalonamento em conjunto:
+* **Eixo Y**: decompõem a aplicação em microserviços;
+* **Eixo X**: em tempo de execução, executam várias instâncias (clones) 
 de cada serviço atrás de um balanceador de carga (*load balancer*);
 * **Eixo Z**: usado por algumas aplicações para particionar serviços, como 
 Banco de Dados.
@@ -209,7 +209,7 @@ para desenvolver e muito mais fáceis de entender e manter.
 
 Outras considerações:
 * Cada serviço pode ser desenvolvido por equipes independentes;
-* Desenvolvedores livres para escolherem qualquer tecnologia, desde que 
+* Desenvolvedores são livres para escolher qualquer tecnologia, desde que 
 honre o contrato da API;
 * Como serviços são relativamente pequenos, torna-se possível reescrever 
 um serviço antigo usando a tecnologia atual.
@@ -228,7 +228,7 @@ desenvolvedores dimensionam de modo a serem bem pequenos.
 * **Objetivo principal dos microserviços: decompor suficientemente a aplicação 
 para facilitar o desenvolvimento e implantação de aplicativos ágeis**.
 
-* Outro grande inconveniente: complexidade qu e surge do fato de que a aplicação
+* Outro grande inconveniente: complexidade que surge do fato de que a aplicação
 é um sistema distribuído (vários serviços interligados)
     * É muitas vezes preciso implementar mecanismos de comunicação entre processos
     baseados em mensagens ou RPC (Chamada a Procedimento Remoto);
@@ -240,9 +240,10 @@ para facilitar o desenvolvimento e implantação de aplicativos ágeis**.
 por exemplo, exigem atualização de várias entidades de negócio. Numa arquitetura 
 monolítica, isso é trivial. Já numa aplicação de microserviços, é preciso atualizar
 vários bancos de dados pertencentes a diferentes serviços.
-    * Transações distribuídas, geralmente, não é uma opção, pois muitos Bancos de Dados
-    não irão suportá-las, como os NoSQL. Assim, por vezes é necessário adotar uma
-    estratégia baseada em consistência, o que ainda mais desafiador para codificação.
+    * Transações distribuídas, geralmente, não é uma opção, pois muitos Bancos de 
+    Dados não irão suportá-las, como os NoSQL. Assim, por vezes é necessário adotar
+    uma estratégia baseada em consistência, o que é ainda mais desafiador para a 
+    codificação.
 
 * O teste da aplicação de microserviços é também bastante complexo. Uma classe 
 de teste semelhante para um serviço precisaria lançar o serviço e quaisquer
@@ -269,5 +270,5 @@ como o **Cloud Foundry**.
     gerenciar seus microserviços. Ele os isola de preocupações como
     aquisição e configuração de recursos computacionais.
 
-* Outra abordagem com PaaS é desenvolvedor um próprio, utilizando uma solução
+* Outra abordagem com PaaS é desenvolver um próprio, utilizando uma solução
 de clustering, como o **Kubernetes**, em conjunto com o **Docker**
