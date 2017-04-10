@@ -110,7 +110,7 @@ intrínsecas.
 
 
 ## Vantagens e Desvantagens de um API Gateway
-* Uma das principais vantagens: encapsulamento da estrutura interna da
+* Uma das principais vantagens: encapsulamento da estrutura interna
 da aplicação. Em vez de se ter que invocar serviços específicos, as
 aplicações clientes se comunicam diretamente com o API Gateway. Isso
 reduz o tráfego de rede entre o cliente e a aplicação. Também simplifica
