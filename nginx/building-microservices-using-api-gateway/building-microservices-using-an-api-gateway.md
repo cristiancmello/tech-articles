@@ -182,13 +182,12 @@ declarativo usando abordagem reativa (*Reactive Programming*). Exemplos:
 Um aplicativo baseado em microserviços é um sistema distribuído e deve usar
 um mecanismo de comunicação inter-processo. Existem dois estilos de comunicação
 entre processos:
+* Usar mecanismo assíncrono baseado em mensagens. Exemplos: 
+**JMS (Java Message Service)**, protocolo 
+**AMQP (Advanced Message Queuing Protocol)**, **ZeroMQ** e etc;
 
-    * Usar mecanismo assíncrono baseado em mensagens. Exemplos: 
-    **JMS (Java Message Service)**, protocolo 
-    **AMQP (Advanced Message Queuing Protocol)**, **ZeroMQ** e etc;
-    
-    * Usar mecanismo síncrono em HTTP. Exemplo: **Apache Thrift**, **ASN.1**, 
-    **Protocol Buffers** e etc.
+* Usar mecanismo síncrono em HTTP. Exemplo: **Apache Thrift**, **ASN.1**, 
+**Protocol Buffers** e etc.
     
 * **IMPORTANTE**: um sistema usará tipicamente estilos assíncronos e síncronos.
 É possível até usar múltiplas implementações de cada estilo. Consequentemente,
@@ -218,7 +217,7 @@ enquanto, vale notar que, se o sistema usa descoberta *Client-side*, o API
 Gateway deve poder consultar o **Service Registry**, que é um banco de dados
 onde as localizações de todas as instâncias de microserviços estão armazenadas.
 
-### Manipulação de falhas parciais
+### Tratamento de falhas parciais
 Outro problema que teremos que resolver será de falhas que ocorrem quando
 um serviço chama um outro que está demorando para responder ou pode estar
 indisponível. O API Gateway não pode esperar indefinidamente por um serviço.
