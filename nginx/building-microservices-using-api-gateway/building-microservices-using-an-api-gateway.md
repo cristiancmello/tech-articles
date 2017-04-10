@@ -160,10 +160,10 @@ são independentes uma da outra. Para minimizar o tempo de resposta, o API
 Gateway deverá executar as requisições independentes simultaneamente. Às
 vezes, no entanto, há dependências entre solicitações. O API Gateway pode
 primeiramente precisar validar a requisição para um serviço de back-end.
-    * Exemplo: para buscar informações sobre produtos na lista de desejos
-    de um cliente, o API Gateway deve primeiro recuperar o perfil do cliente
-    que contém essas informações e, em seguida, recuperar as informações de
-    cada produto.
+* Exemplo: para buscar informações sobre produtos na lista de desejos
+de um cliente, o API Gateway deve primeiro recuperar o perfil do cliente
+que contém essas informações e, em seguida, recuperar as informações de
+cada produto.
 
 * Escrever código de API usando a abordagem de retorno de chamada assíncrona
 tradicional rapidamente nos leva ao inferno de retorno de chamada. Haverá
