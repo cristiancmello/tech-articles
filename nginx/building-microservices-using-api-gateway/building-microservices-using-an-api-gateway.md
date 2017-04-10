@@ -6,7 +6,7 @@ Exemplo abaixo, o diagrama mostra o que veremos ao percorrer os detalhes do
 produto no aplicativo móvel da Amazon.
 
 <p align="center">
-    <img src="..."/>
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-1.png"/>
 </p>
 
 Mesmo sendo um aplicativo para smartphone, a página de detalhes do produto
@@ -39,7 +39,7 @@ e preço;
 * e etc;
 
 <p align="center">
-    <img src="..."/>
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-2.png"/>
 </p>
 
 
@@ -90,7 +90,7 @@ responsabilidades, tais como:
 
 <p align="center">
     <figure>
-        <img src="..."/>
+        <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-3.png"/>
         <figcaption>API Gateway gerenciando as APIs REST.</figcaption>
     </figure>
 </p>
@@ -182,11 +182,12 @@ declarativo usando abordagem reativa (*Reactive Programming*). Exemplos:
 Um aplicativo baseado em microserviços é um sistema distribuído e deve usar
 um mecanismo de comunicação inter-processo. Existem dois estilos de comunicação
 entre processos:
-    - Usar mecanismo assíncrono baseado em mensagens. Exemplos: 
+
+    * Usar mecanismo assíncrono baseado em mensagens. Exemplos: 
     **JMS (Java Message Service)**, protocolo 
     **AMQP (Advanced Message Queuing Protocol)**, **ZeroMQ** e etc;
     
-    - Usar mecanismo síncrono em HTTP. Exemplo: **Apache Thrift**, **ASN.1**, 
+    * Usar mecanismo síncrono em HTTP. Exemplo: **Apache Thrift**, **ASN.1**, 
     **Protocol Buffers** e etc.
     
 * **IMPORTANTE**: um sistema usará tipicamente estilos assíncronos e síncronos.
