@@ -6,7 +6,7 @@ Exemplo abaixo, o diagrama mostra o que veremos ao percorrer os detalhes do
 produto no aplicativo móvel da Amazon.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-1.png"/>
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/2-building-microservices-using-api-gateway/nginx-img-1.png"/>
 </p>
 
 Mesmo sendo um aplicativo para smartphone, a página de detalhes do produto
@@ -39,7 +39,7 @@ e preço;
 * e etc;
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-2.png"/>
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/2-building-microservices-using-api-gateway/nginx-img-2.png"/>
 </p>
 
 
@@ -89,7 +89,7 @@ responsabilidades, tais como:
 * E etc.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/building-microservices-using-api-gateway/nginx-img-3.png"/>
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/2-building-microservices-using-api-gateway/nginx-img-3.png"/>
 </p>
 
 * Logo, o API Gateway é responsável pelo roteamento de requisições, composição
