@@ -108,7 +108,7 @@ Em tempo de execução, cada instância é geralmente uma nuvem em VM
 Abaixo, há uma possível decomposição funcional da aplicação:
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/intro-microservices/nginx-article-1.png" width="500" height="500">
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/1-intro-microservices/nginx-article-1.png" width="500" height="500">
 </p>
 
 Cada área funcional da aplicação é agora implementada por seu próprio 
@@ -146,7 +146,7 @@ dados), onde um atributo da solicitação (como chave-primária) é usado para
 encaminhar a solicitação para um servidor específico.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/intro-microservices/nginx-article-2.png" width="500" height="380">
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/1-intro-microservices/nginx-article-2.png" width="500" height="380">
 </p>
 
 As aplicações costumam utilizar os três tipos de escalonamento em conjunto:
@@ -160,7 +160,7 @@ A seguir, um exemplo de serviço de **Gerência de Viagem** implementado com
 o Docker na AWS EC2.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/intro-microservices/nginx-article-3.png" width="500" height="500">
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/1-intro-microservices/nginx-article-3.png" width="500" height="500">
 </p>
 
 ### Relação da Arquitetetura de Microserviço e o Banco de Dados
@@ -175,7 +175,7 @@ de microservices, porque garante acoplamento frouxo. O diagrama a seguir
 mostra a arquitetura do BD para o aplicativo de exemplo.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/intro-microservices/nginx-article-4.png" width="500" height="350">
+    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/1-intro-microservices/nginx-article-4.png" width="500" height="350">
 </p>
 
 Cada um dos serviços tem seu próprio Banco de Dados. Além disso, um 
