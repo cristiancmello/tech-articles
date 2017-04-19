@@ -2,7 +2,7 @@
 Architecture
 
 Em um aplicação monolítica, os componentes invocam uns aos outros através
-de chamadas de função ou de nível de linguagem. Em constraste, um aplicação
+de chamadas de função ou de nível de linguagem. Em contraste, um aplicação
 baseada em microservices é um sistema distribuído executado em várias
 máquinas. Cada instâncias de serviço é tipicamente um processo. Para interagir
 com os serviços, podemos utilizar um **mecanismo de comunicação entre 
@@ -18,7 +18,6 @@ serão discutidos problemas de design.
 ## Estilos de Interação
 É útil pensar sobre como os serviços interagem. Há ma variedade de estilos
 de interação *Cliente* <=> *Servidor*.
-
 
 Os estilos de interação podem ser categorizados em 2 dimensões:
 
@@ -47,22 +46,22 @@ A tabela a seguir mostra os vários estilos de interação.
   </tr>
   <tr>
     <th>Síncrono:</th>
-    <td>Requisição / Resposta</td>
+    <td>Requisição/Resposta</td>
     <td>-</td>
   </tr>
   <tr>
     <th rowspan="2">Assíncrono:</th>
     <td>Notificação</td>
-    <td>Publicar / Assinar</td>
+    <td>Publicar/Assinar</td>
   </tr>
   <tr>
-    <td>Resposta de Solicitação / Resposta Assíncrona</td>
-    <td>Publicar / Respostas Assíncronas</td>
+    <td>Resposta de Solicitação/Resposta Assíncrona</td>
+    <td>Publicar/Respostas Assíncronas</td>
   </tr>
 </table>
 
 * Tipos de **interações 1:1**:
-    - **Requisição / Resposta**: um cliente solicita um serviço e aguarda uma
+    - **Requisição/Resposta**: um cliente solicita um serviço e aguarda uma
     resposta. O cliente espera que a resposta chegue em tempo hábil. Num
     aplicativo baseado em thread, o segmento que faz a solicitação pode
     até bloquear enquanto espera;
@@ -71,16 +70,16 @@ A tabela a seguir mostra os vários estilos de interação.
     um cliente envia uma solicitação para um serviço, mas nenhuma resposta
     é esperada ou enviada;
     
-    - **Requisição / Resposta assíncrona**: um cliente envia uma solicitação
+    - **Requisição/Resposta assíncrona**: um cliente envia uma solicitação
     para um serviço, que responde de forma assíncrona. O cliente não bloqueia
     enquanto espera e é projetado com o pressuposto de que a resposta pode não
     chegar a tempo.
     
 * Tipos de **interações 1:N**:
-    - **Publicar / Subscrever**: um cliente publica uma mensagem de 
+    - **Publicar/Subscrever**: um cliente publica uma mensagem de 
     notificação, que é consumida por zero ou mais serviços interessados.
 
-    - **Publicar / Respostas assíncronas**: um cliente publica uma mensagem de
+    - **Publicar/Respostas assíncronas**: um cliente publica uma mensagem de
     solicitação e, em seguida, aguarda certo tempo para respostas de serviços
     interessados.
 
@@ -94,18 +93,18 @@ interagir quando o usuário solicita uma viagem.
     <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-1.png" width="800px"/>
 </p>
 
-* Os serviços usam uma combinação de notificações, requisição / resposta e
-publicar / assinar. Por exemplo, um smartphone do passageiro envia uma
+* Os serviços usam uma combinação de notificações, requisição/resposta e
+publicar/assinar. Por exemplo, o smartphone do passageiro envia uma
 notificação para o serviço **Trip Management** para solicitar um
 veículo. O serviço **Trip Management** verifica se a conta do passageiro
-está ativa, usando requisição / resposta para invocar o **Passenger 
-Management**. O serviço **Trip Management** cria a viagem e usa publicar / 
-assinar para notificar outros serviços, incluindo o **Dispatcher**, que
-localiza uma corrida disponível.
+está ativa, usando requisição/resposta para invocar o **Passenger 
+Management**. O serviço **Trip Management** cria a viagem e usa 
+publicar/assinar para notificar outros serviços, incluindo o **Dispatcher**, 
+que localiza uma corrida disponível.
 
 ## Definindo APIs
 * Uma API é um contrato entre um serviço e seus clientes. Independente da 
-escolha do mecanismo de comunicação entre processos (IPC), é importante
+escolha do mecanismo de **comunicação entre processos** (**IPC**), é importante
 definir com precisão a API através de algum tipo de linguagem de definição
 de interface (IDL).
     - Projetar a definição de API e apresentar aos desenvolvedores das 
@@ -115,14 +114,14 @@ de interface (IDL).
 
 * **IMPORTANTE**: a natureza da definição de API depende do mecanismo de IPC
 adotado. Se estivermos usando HTTP, por exemplo, a API poderá ser definida
-através de URLs e nos formatos de dados de requisição / resposta.
+através de URLs e nos formatos de dados de requisição/resposta.
 
 ## APIs em evolução
 * API de um serviço muda invariavelmente ao longo do tempo. Em um aplicativo
 monolítico, é geralmente simples mudar a API e atualizar todos os *callers*.
 
 * Numa aplicação de microserviços, há muitos problemas em atualizar a API
-devido a compatibilidade que os consumidores dos serviços esperam.
+devido à compatibilidade que os consumidores dos serviços esperam.
 
 * Logo, **é importante ter uma estratégia para lidar com essas questões**.
   - Os clientes que usam uma API mais antiga devem continuar a trabalhar
@@ -148,7 +147,7 @@ devido a compatibilidade que os consumidores dos serviços esperam.
 
 ## Tratamento de falhas parciais
 * Há sempre um risco de falhas parciais na comunicação entre serviços, seja
-devido a manutenção, desativação ou sobrecarga.
+devido à manutenção, desativação ou sobrecarga.
 
 * Exemplo: considere a tela de *Detalhes de Produto*. Ele faz uso do
 **Serviço de Recomendação** e imaginemos que esse serviço pare de
@@ -171,14 +170,14 @@ tendo em vista cenários de falhas.
 Através da biblioteca [Netflix Hystrix](https://github.com/Netflix/Hystrix),
 são implementadas as estratégias a seguir e outros padrões.
 
-* **Timeouts de rede**: nunca bloqueie indefinidamente e use sempre tempos
-limite ao esperar por uma resposta. Usando tempos limite garante que os
-recursos nunca serão "travados" por tempo indeterminado.
+* **Timeouts de rede**: nunca bloqueie indefinidamente e use sempre 
+tempos-limite ao esperar por uma resposta. O uso de tempos-limite garante que
+os recursos nunca serão "travados" por tempo indeterminado.
 
-* **Limite de número de requisições pendentes**: impor um limite superior
-sobre o número de requisições pendentes que um cliente pode ter com um
+* **Limite de número de requisições pendentes**: consiste em impor um limite 
+superior sobre o número de requisições pendentes que um cliente pode ter com um
 determinado serviço. Se o limite for atingido, provavelmente é inútil
-fazer requisições adicionais, sendo que as mesmas precisam falhar
+fazer requisições adicionais, sendo que as mesmas precisarão falhar
 imediatamente.
 
 * **Circuit Breaker Pattern**: rastreia o número de solicitações bem-
@@ -186,12 +185,12 @@ sucedidas e com falha. Se a taxa de erro exceder um limite configurado,
 dispare um *circuit breaker* para que outras tentativas falhem imediatamente.
 Se um grande número de solicitações estão falhando, isso sugere que o serviço 
 não está disponível e que enviar requisições é inútil. Após um período de
-tempo limite, o cliente deve tentar novamente e, se bem-sucedido, fechar o
+tempo-limite, o cliente deve tentar novamente e, se bem-sucedido, fechar o
 *circuit breaker*.
 
 * **Fornecimento de Fallbacks**: executa a lógica de fallback quando uma
 solicitação falha. Por exemplo, retornar dados armazenados em cache ou um
-valor padrão, como um conjunto vazio de recomendações.
+valor padrão, como um conjunto vazio de recomendações, por exemplo.
 
 ## Tecnologias de IPC
 Há muitas tecnologias de comunicação entre processos (IPC):
@@ -226,15 +225,15 @@ cliente é criado assumindo que a resposta não será recebida imediatamente.
     consumidores conectados; os serviços usam canais publish-subscribe para
     os **estilos de interação 1:N**.
     
-O diagrama abaixo mostrar como a aplicação de solicitação de táxi pode
+O diagrama abaixo mostra como a aplicação de solicitação de táxi pode
 usar canais **Publish-Subscribe**.
 
 <p align="center">
   <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-3.png" width="700px"/>
 </p>
 
-* O serviço Trip Management notifica os serviço interessados, como o 
-Dispatcher, sobre um nova viagem, escrevendo uma mensagem Trip Created
+* O serviço Trip Management notifica os serviços interessados, como o 
+Dispatcher, sobre uma nova viagem, escrevendo a mensagem Trip Created
 para um canal de **Publish-Subscribe**. O Dispatcher localiza uma corrida
 disponível e notifica outros serviços escrevendo uma mensagem de Corrida
 Disponível para um canal de **Publish-Subscribe**.
@@ -251,7 +250,7 @@ Disponível para um canal de **Publish-Subscribe**.
 
 * Vantagens em se usar mensagens:
   - **Desacopla o cliente do serviço**: um cliente faz uma requisição
-  simplesmente enviando uma menasgem para o canal apropriado. O cliente
+  simplesmente enviando uma mensagem para o canal apropriado. O cliente
   está completamente inconsciente das instâncias de serviço. Ele não
   precisa usar um mecanismo de descoberta para determinar o local de uma
   instância de serviço;
@@ -275,7 +274,7 @@ Disponível para um canal de **Publish-Subscribe**.
 
 * Desvantagens em se usar mensagens:
   - **Complexidade operacional adicional**: o sistema de mensagens será
-  outro componentes a ser instalado, configurado e operado. É essencial
+  outro componente a ser instalado, configurado e operado. É essencial
   que o *message broker** seja altamente disponível, caso contrário,
   a confiabilidade do sistema é impactada;
 
@@ -283,15 +282,15 @@ Disponível para um canal de **Publish-Subscribe**.
   estilo requer algum trabalho a ser implementado. Cada mensagem de pedido
   deve conter um identificador de canal de resposta e um identificador
   de correlação. O serviço grava uma mensagem de resposta contendo
-  contendo o ID de correlação para o canal de resposta. O clien utiliza
+  o ID de correlação para o canal de resposta. O cliente utiliza
   o ID de correlação para corresponder à resposta com a solicitação. Muitas
   vezes, é mais fácil usar um mecaniso de IPC que suporte diretamente
   requisição/resposta.
 
-### IPC baseado em requisição / resposta síncrona
+### IPC baseado em requisição/resposta síncrona
 * Basicamente, um mecanismo baseado em requisição/resposta consiste no
 envio de uma solicitação por parte do cliente para um serviço. O serviço
-processa a requisição e envia ma resposta.
+processa a requisição e envia uma resposta.
 
 * O cliente assume que a resposta à requisição chegará em tempo hábil.
 
@@ -302,9 +301,9 @@ processa a requisição e envia ma resposta.
 #### REST
 - Está muito em voga desenvolver APIs ao estilo **RESTful**;
 - O REST é um mecanismo IPC que quase sempre usa HTTP;
-- Conceito-chave em REST: **resource**, que normalmente representa
-  *objeto de negócios*, como Cliente ou Produto, ou *coleção de objetos
-  de negócios*.
+- Conceito-chave em REST: **resource**, que normalmente representa o
+  *objeto do negócio*, como Cliente ou Produto, ou *coleção de objetos
+  do negócios*.
   - Utiliza verbos HTTP (GET, POST, PUT/PATCH, DELETE) para manipular
   resources.
 
@@ -360,7 +359,7 @@ Há inúmeros benefícios ao se utilizar um protocolo baseado em HTTP:
 - Facilidade ao se testar uma API HTTP através de um navegador web
 com extensão (como o 
 [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop))
-ou o utilitário de linha de comando **curl**;
+ou o utilitário de linha de comando, como o **curl**;
 - Ele suporta diretamente a comunicação de requisição/resposta;
 - HTTP é naturalmente *firewall-friendly*;
 - Não requer um *intermediate broker*, o que simplifica a arquitetura do
@@ -396,9 +395,9 @@ Uma interface Thrift consiste em um ou mais serviços. Uma definição
 de serviço é análoga a uma interface Java. É uma coleção de métodos
 fortemente tipados. Os métodos Thrift podem retornar um valor
 ou podem ser definidos como *one-way* (mão única). Os métodos que retornam
-um valor um valor implementam o estilo de interação de requisição/resposta.
+um valor implementam o estilo de interação de requisição/resposta.
 O cliente aguarda uma resposta e pode lançar uma exceção. Os métodos
-unidirecionais (*one-ways*) correspondem ao estilo de interação de notificação.
+unidirecionais (*one-way*) correspondem ao estilo de interação de notificação.
 O servidor, assim, não envia uma resposta.
 
 Thrift suporta vários formatos de mensagem:
@@ -423,11 +422,12 @@ Existem 2 tipos principais de formatos de mensagem: **texto** e **binário**.
 
 * *Texto*: como exemplo JSON e XML. Possuem uma boa legibilidade e
 são auto-descritivos. Entretanto, possuem uma desvantagem de se exigir
-análise sintática do texto, o que pode sobrecarregar a aplicação dependendendo
+análise sintática do texto, o que pode sobrecarregar a aplicação dependendo
 da dimensão das mensagens e recursos computacionais;
 
 * *Binário*: como exemplo o Thrift binário. Se fizermos a escolha do formato
-da mensagem, as opções populares são o 
+da mensagem, iremos precisar de escolher alguma tecnologia. As opções populares 
+disponíveis são o 
 [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
 e [Apache Avro](https://avro.apache.org/). A respeito da evolução da API,
 é mais fácil desenvolver com o formato de mensagem do **Protocol Buffers**.
