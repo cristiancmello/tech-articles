@@ -289,10 +289,148 @@ Disponível para um canal de **Publish-Subscribe**.
   requisição/resposta.
 
 ### IPC baseado em requisição / resposta síncrona
+* Basicamente, um mecanismo baseado em requisição/resposta consiste no
+envio de uma solicitação por parte do cliente para um serviço. O serviço
+processa a requisição e envia ma resposta.
 
+* O cliente assume que a resposta à requisição chegará em tempo hábil.
+
+* 2 protocolos populares:
+    - **REST**;
+    - **Apache Thrift**.
 
 #### REST
+- Está muito em voga desenvolver APIs ao estilo **RESTful**;
+- O REST é um mecanismo IPC que quase sempre usa HTTP;
+- Conceito-chave em REST: **resource**, que normalmente representa
+  *objeto de negócios*, como Cliente ou Produto, ou *coleção de objetos
+  de negócios*.
+  - Utiliza verbos HTTP (GET, POST, PUT/PATCH, DELETE) para manipular
+  resources.
+
+Diagrama abaixo mostrar uma das maneiras pelas quais o aplicativo de
+táxi pode usar REST.
+
+<p align="center">
+  <img src="..."/>
+</p>
+
+- Smartphone do passageiro solicita uma viagem fazendo um **POST** para
+resource **/trips** do serviço de Gerenciamento de Viagem;
+
+- Em seguida, o Gerenciamento de Viagem processa o pedido enviando um
+**GET** ao serviço de Gerenciamento de Passageiros;
+
+- Depois de verificar que o passageiro está autorizado a criar uma viagem,
+o serviço de Gerenciamento de Viagem cria um viagem e retorna **201**
+ao smartphone.
+
+Muitos desenvolvedores afirmam que suas APIs baseadas em HTTP são RESTful.
+No entanto, Fielding descreve neste 
+[post](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)
+que nem todos são.
+
+Leonard Richardson define um 
+[modelo](https://martinfowler.com/articles/richardsonMaturityModel.html)
+de maturidade útil para REST que consiste nos seguintes níveis:
+
+* **Nível 0**: os clientes de uma API de nível 0 invocam o serviço fazendo
+solicitações **POST** num único *end-point* de URL. Cada requisição
+especifica a ação a executar, o destino da ação (o objeto de negócios, 
+por exemplo) e quaisquer parâmetros;
+
+* **Nível 1**: suporte ao conceito de **resources**. Para executar uma ação
+num resource, um cliente faz uma requisição POST que especifica a ação a
+executar e quaisquer parâmetros;
+
+* **Nível 2**: uso de **verbos HTTP** para executar ações. Notáveis:
+  - **GET**: recuperar;
+  - **POST**: criar;
+  - **PUT/PATCH**: atualização (comumente utilizado, mas não em definitivo);
+  - **DELETE**: destruir.
+
+* **Nível 3**: baseado no princípio **HATEOAS** (Hypertext as Engine Of 
+Application State). A ideia básica é a representação de um **resource**
+e **links para ações permitidas**, o que faz com que o cliente não
+precise adivinhar quais ações podem ou não ser executadas em num
+resource em seu estado atual.
+
+Há inúmeros benefícios ao se utilizar um protocolo baseado em HTTP:
+- HTTP é mais simples e familiar;
+- Facilidade ao se testar uma API HTTP através de um navegador web
+com extensão (como o 
+[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop))
+ou o utilitário de linha de comando **curl**;
+- Ele suporta diretamente a comunicação de requisição/resposta;
+- HTTP é naturalmente *firewall-friendly*;
+- Não requer um *intermediate broker*, o que simplifica a arquitetura do
+sistema.
+
+Há algumas desvantagens para se usar HTTP:
+- Ele suporta diretamente o estilo de interação requisição/resposta. Podemos
+usá-lo para notificações, mas o servidor sempre deve enviar uma resposta HTTP;
+
+- Tanto o cliente quanto o servidor precisam estar em execução durante o
+período de comunicação;
+
+- O cliente deve saber o local (ou seja, a URL) de cada instância de serviço.
+Este é um problema não-trivial em um aplicação moderna. Como relatado no artigo
+anterior, os clientes devem usar um mecanismo de descoberta de serviço para
+localizar instâncias de serviço.
+
+A comunidade de desenvolvedores redescobriu o valor de uma linguagem de 
+definição de interface para um API RESTful. Algumas opções são:
+- [RAML](http://raml.org/);
+- [Swagger](http://swagger.io/);
+- [Apiary](https://apiary.io/).
+
+Há uma especificação de API RESTful baseada em JSON bastante adotada, 
+chamada de [json:api](http://jsonapi.org/).
 
 #### Apache Thrift
+É uma alternativa interessante ao REST. É uma framework para escrever
+cliente/servidor baseado em RPC (chamada à procedimento remoto) com
+suporte a muitas linguagens (ex.: C/C++, Python, PHP, Node.js, ...).
+
+Uma interface Thrift consiste em um ou mais serviços. Uma definição
+de serviço é análoga a uma interface Java. É uma coleção de métodos
+fortemente tipados. Os métodos Thrift podem retornar um valor
+ou podem ser definidos como *one-way* (mão única). Os métodos que retornam
+um valor um valor implementam o estilo de interação de requisição/resposta.
+O cliente aguarda uma resposta e pode lançar uma exceção. Os métodos
+unidirecionais (*one-ways*) correspondem ao estilo de interação de notificação.
+O servidor, assim, não envia uma resposta.
+
+Thrift suporta vários formatos de mensagem:
+- **JSON** (humanamente mais amigável);
+- **Binário** (mais eficiente do que JSON porque é mais rápido para 
+decodificar);
+- **Binário compactado** (mais eficiente em termos de espaço).
+
+**IMPORTANTE**: Thrift permite a escolha de protocolos de transporte.
+Podemos utilizar ou **TCP** (formato mais bruto do que HTTP e portanto 
+mais rápido) ou **HTTP** (formato mais amigável para firewalls, navegadores
+e humanamente inteligível).
 
 ### Formatos de mensagem
+Se utilizarmos um sistema de mensagens ou REST, podemos escolher um
+formato de mensagem. Outros mecanismos de IPC, como o Thrift, podem
+suportar apenas um pequeno número de formatos de mensagem, ou
+talvez apenas um formato. Em ambos os casos, é importante usar
+algum formato de mensagem para várias linguagens.
+
+Existem 2 tipos principais de formatos de mensagem: **texto** e **binário**.
+
+* *Texto*: como exemplo JSON e XML. Possuem uma boa legibilidade e
+são auto-descritivos. Entretanto, possuem uma desvantagem de se exigir
+análise sintática do texto, o que pode sobrecarregar a aplicação dependendendo
+da dimensão das mensagens e recursos computacionais;
+
+* *Binário*: como exemplo o Thrift binário. Se fizermos a escolha do formato
+da mensagem, as opções populares são o 
+[Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
+e [Apache Avro](https://avro.apache.org/). A respeito da evolução da API,
+é mais fácil desenvolver com o formato de mensagem do **Protocol Buffers**.
+
+* Uma [postagem interessante](http://martin.kleppmann.com/2012/12/05/schema-evolution-in-avro-protocol-buffers-thrift.html) 
+com a comparação entre Avro, Protocol Buffers e Thrift.
