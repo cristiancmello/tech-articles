@@ -9,7 +9,7 @@ com os serviços, podemos utilizar um **mecanismo de comunicação entre
 processos** (**IPC**).
 
 <p align="center">
-    <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-0.png"/>
+    <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-0.png" width="800px"/>
 </p>
 
 Futuramente, iremos abordar as tecnologias de IPC específicas. Neste artigo,
@@ -91,7 +91,7 @@ O diagrama abaixo mostra como os serviços de um aplicativo de táxi podem
 interagir quando o usuário solicita uma viagem.
 
 <p align="center">
-    <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-1.png"/>
+    <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-1.png" width="800px"/>
 </p>
 
 * Os serviços usam uma combinação de notificações, requisição / resposta e
@@ -230,7 +230,7 @@ O diagrama abaixo mostrar como a aplicação de solicitação de táxi pode
 usar canais **Publish-Subscribe**.
 
 <p align="center">
-  <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-3.png"/>
+  <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-3.png" width="700px"/>
 </p>
 
 * O serviço Trip Management notifica os serviço interessados, como o 
@@ -312,7 +312,7 @@ Diagrama abaixo mostrar uma das maneiras pelas quais o aplicativo de
 táxi pode usar REST.
 
 <p align="center">
-  <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-4.png"/>
+  <img src="https://cdn.rawgit.com/mrparty/tech-articles/master/nginx/3-building-microservices-ipc-micro-arch/nginx-article-4.png" width="700px"/>
 </p>
 
 - Smartphone do passageiro solicita uma viagem fazendo um **POST** para
