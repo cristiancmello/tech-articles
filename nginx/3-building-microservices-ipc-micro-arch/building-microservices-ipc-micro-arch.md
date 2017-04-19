@@ -1,5 +1,4 @@
-# Building Microservices: Inter-Process Communication in a Microservices 
-Architecture
+# Building Microservices: Inter-Process Communication in a Microservices Architecture
 
 Em um aplicação monolítica, os componentes invocam uns aos outros através
 de chamadas de função ou de nível de linguagem. Em contraste, um aplicação
