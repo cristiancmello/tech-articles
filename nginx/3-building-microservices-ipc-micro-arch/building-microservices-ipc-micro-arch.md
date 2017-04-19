@@ -37,27 +37,29 @@ Os estilos de interação podem ser categorizados em 2 dimensões:
     
 A tabela a seguir mostra os vários estilos de interação.
 
-<table style="width:100%">
-  <tr>
-    <th></th>
-    <td><b>Interação 1:1</b></td>
-    <td><b>Interação 1:N</b></td>
-  </tr>
-  <tr>
-    <th>Síncrono:</th>
-    <td>Requisição/Resposta</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th rowspan="2">Assíncrono:</th>
-    <td>Notificação</td>
-    <td>Publicar/Assinar</td>
-  </tr>
-  <tr>
-    <td>Resposta de Solicitação/Resposta Assíncrona</td>
-    <td>Publicar/Respostas Assíncronas</td>
-  </tr>
-</table>
+<p align="center">
+  <table style="width:100%">
+    <tr>
+      <th></th>
+      <td><b>Interação 1:1</b></td>
+      <td><b>Interação 1:N</b></td>
+    </tr>
+    <tr>
+      <th>Síncrono:</th>
+      <td>Requisição/Resposta</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th rowspan="2">Assíncrono:</th>
+      <td>Notificação</td>
+      <td>Publicar/Assinar</td>
+    </tr>
+    <tr>
+      <td>Resposta de Solicitação/Resposta Assíncrona</td>
+      <td>Publicar/Respostas Assíncronas</td>
+    </tr>
+  </table>
+</p>
 
 * Tipos de **interações 1:1**:
     - **Requisição/Resposta**: um cliente solicita um serviço e aguarda uma
@@ -274,7 +276,7 @@ Disponível para um canal de **Publish-Subscribe**.
 * Desvantagens em se usar mensagens:
   - **Complexidade operacional adicional**: o sistema de mensagens será
   outro componente a ser instalado, configurado e operado. É essencial
-  que o *message broker** seja altamente disponível, caso contrário,
+  que o *message broker* seja altamente disponível, caso contrário,
   a confiabilidade do sistema é impactada;
 
   - **Complexidade da implementação de requisição/resposta**: esse
