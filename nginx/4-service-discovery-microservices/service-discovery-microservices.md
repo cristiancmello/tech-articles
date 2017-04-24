@@ -11,7 +11,7 @@ Entretanto, num aplicativo moderno de microservices baseado em nuvem, este é
 um problema muito mais difícil de resolver, como mostrado no diagrama a seguir.
 
 <p align="center">
-    <img src="nginx-article-0.png"/>
+    <img src="nginx-article-0.png" width="600px"/>
 </p>
 
 Instâncias do serviço *Registry Client* são atribuídas com locais de rede
@@ -36,7 +36,7 @@ disponíveis e faz uma solicitação.
 O diagrama a seguir mostra a estrutura desse padrão.
 
 <p align="center">
-    <img src="nginx-article-1.png"/>
+    <img src="nginx-article-1.png" width="600px"/>
 </p>
 
 **O local de rede de uma instância de serviço é registrado como registro
@@ -72,7 +72,7 @@ A outra abordagem para a descoberta de serviço é o padrão de **descoberta
 do lado servidor**. O diagrama a seguir ilustra a estrutura desse padrão.
 
 <p align="center">
-    <img src="nginx-article-2.png"/>
+    <img src="nginx-article-2.png" width="700px"/>
 </p>
 
 O cliente faz uma solicitação para um serviço por meio de um **balanceador
@@ -168,7 +168,7 @@ de serviço envia requisições de *heartbeat* para impedir que seu registro
 expire. O diagrama a seguir mostra a estrutura desde padrão.
 
 <p align="center">
-    <img src="nginx-article-3.png"/>
+    <img src="nginx-article-3.png" width="500px"/>
 </p>
 
 O padrão de Auto-Registro tem vários benefícios e desvantagens. Um benefício
@@ -192,7 +192,7 @@ instâncias de serviço encerradas. O diagrama abaixo mostrar a estrutura
 desse padrão.
 
 <p align="center">
-    <img src="nginx-article-4.png"/>
+    <img src="nginx-article-4.png" width="700px"/>
 </p>
 
 * [Registrator](http://gliderlabs.github.io/registrator/latest/): um exemplo
