@@ -1,4 +1,4 @@
-# Introdução aos Microservices
+# 1. Introdução aos Microservices
 * Apesar de todo o entusiasmo e ceticismo a cerca da ideia de Microservices, 
 esse padrão arquitetural tem benefícios significativos - especialmente quando 
 se trata em habilitar o desenvolvimento ágil e entrega de apps corporativos 

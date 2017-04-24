@@ -1,4 +1,4 @@
-# Construindo Microservices: usando um API Gateway
+# 2. Construindo Microservices: Usando um API Gateway
 Suponha que iremos construir um aplicativo para Android de e-commerce. É
 bem provável que precisaremos implementar uma página de detalhes do produto.
 

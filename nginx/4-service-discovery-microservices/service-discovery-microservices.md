@@ -1,4 +1,4 @@
-# Service Discovery in a Microservices Architecture
+# 4. Descoberta de Serviço na Arquitetura de Microservices
 
 ## Por que usar a Descoberta de Serviço?
 Vamos imaginar que estamos escrevendo um código que invoca um serviço que tem
