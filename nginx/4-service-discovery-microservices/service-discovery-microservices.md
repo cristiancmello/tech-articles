@@ -159,7 +159,7 @@ de alto desempenho amplamente utilizado para aplicações distribuídas.
 ## Opções do Serviço de Registro
 Há um par de maneiras diferentes de lidar com o registro e cancelamento do
 registro de um serviço. Uma opção é o padrão de **Auto-Registro** e a outra
-é o padrão de **registro de Terceiros**.
+é o padrão de **Registro de Terceiros**.
 
 ### O Padrão de Auto-Registro
 A instância de serviço é responsável pelo registro e cancelamento do próprio
