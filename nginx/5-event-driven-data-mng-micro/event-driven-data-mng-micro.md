@@ -108,7 +108,7 @@ ao se criar um pedido**.
 um **Evento de Criação de Pedido**.
 
 <p align="center">
-    <img src="nginx-article-0.png"/>
+    <img src="nginx-article-1.png"/>
 </p>
 
 * 2. O Serviço ao Cliente consome o **Evento de Criação de Pedido**,
@@ -116,14 +116,14 @@ reserva o crédito para o pedido e publica um **Evento de Reserva de
 Crédito**.
 
 <p align="center">
-    <img src="nginx-article-1.png"/>
+    <img src="nginx-article-2.png"/>
 </p>
 
 * 3. O Serviço de Pedidos consome o **Evento de Reserva de Crédito** e altera
 o estado do pedido para **OPEN**.
 
 <p align="center">
-    <img src="nginx-article-2.png"/>
+    <img src="nginx-article-3.png"/>
 </p>
 
 Um cenário mais complexo pode envolver etadas adicionais, como a reserva de
@@ -146,7 +146,7 @@ os eventos relevantes e atualiza a *view*.
     pelo Serviço ao Cliente e pelo Serviço de Pedidos.
 
 <p align="center">
-    <img src="nginx-article-3.png"/>
+    <img src="nginx-article-4.png"/>
 </p>
 
 * Quando o Serviço de Atualização de Visualização de Pedidos de Cliente recebe
@@ -202,7 +202,7 @@ publica os eventos no Message Broker e usa uma transação local para marcar os
 eventos conforme publicados. O diagrama a seguir mostra o projeto.
 
 <p align="center">
-    <img src="nginx-article-4.png"/>
+    <img src="nginx-article-5.png"/>
 </p>
 
 * O Serviço de Pedidos insere uma linha na tabela ORDER e insere um **Evento
@@ -231,7 +231,7 @@ lê o log de transações e publica eventos para o Message Broker. O diagrama a
 seguir mostrar o projeto.
 
 <p align="center">
-    <img src="nginx-article-5.png"/>
+    <img src="nginx-article-6.png"/>
 </p>
 
 Exemplos de projetos que usam essa abordagem:
@@ -280,7 +280,7 @@ de estado: Criado, Aprovado, Enviado, Cancelado. Cada evento contém dados
 suficientes para reconstruir o estado do Pedido.
 
 <p align="center">
-    <img src="nginx-article-6.png"/>
+    <img src="nginx-article-7.png"/>
 </p>
 
 Os eventos persistem numa **Store de Eventos**, que é um Banco de Dados de
