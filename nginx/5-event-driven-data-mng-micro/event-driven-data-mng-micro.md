@@ -61,7 +61,7 @@ de uma loja on-line B2B (Business-to-Business):
 abaixo ilustra isso.
 
 <p align="center">
-    <img src="nginx-article-0.png"/>
+    <img src="nginx-article-0.png" width="700px"/>
 </p>
 
 * O Serviço de Pedidos não pode acessar diretamente a tabela de *CUSTOMER*.
