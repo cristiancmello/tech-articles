@@ -104,14 +104,14 @@ ao se criar um pedido**.
     - **Message Broker**: meio pelo qual os microservices trocam
     eventos.
 
-* 1. O Serviço de Pedidos cria um Pedido com status **NEW** e publica
+1. O Serviço de Pedidos cria um Pedido com status **NEW** e publica
 um **Evento de Criação de Pedido**.
 
 <p align="center">
     <img src="nginx-article-1.png"/>
 </p>
 
-* 2. O Serviço ao Cliente consome o **Evento de Criação de Pedido**,
+2. O Serviço ao Cliente consome o **Evento de Criação de Pedido**,
 reserva o crédito para o pedido e publica um **Evento de Reserva de
 Crédito**.
 
@@ -119,7 +119,7 @@ Crédito**.
     <img src="nginx-article-2.png"/>
 </p>
 
-* 3. O Serviço de Pedidos consome o **Evento de Reserva de Crédito** e altera
+3. O Serviço de Pedidos consome o **Evento de Reserva de Crédito** e altera
 o estado do pedido para **OPEN**.
 
 <p align="center">
