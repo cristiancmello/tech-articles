@@ -273,7 +273,7 @@ estado). Geralmente, trata requisições invocando serviços da AWS.
 (como S3, DynamoDB, Kinesis ou algum serviço de email);
 3. Automaticamente, através de um AWS API Gateway para lidar com requisições
 HTTP de clientes da aplicação.
-4. Periodicamente, de acordo com uma tarefa *cron* (tarefa agendada).
+4. Periodicamente, de acordo com uma tarefa **cron** (tarefa agendada).
 
 * A AWS Lambda é uma maneira conveniente de implantar microservices. O
 custo baseado em requisição significa que só pagaremos pelo trabalho
@@ -283,7 +283,7 @@ da nossa aplicação.
 
 * Existem algumas limitações significativas. Não se destina a ser usado para
 implantar serviços de longa duração de execução. As requisições devem ser
-concluídas em até 300 ms. Os serviços devem ser stateless, uma vez que,
+concluídas em até 300 segundos. Os serviços devem ser stateless, uma vez que,
 em teoria, a AWS Lambda pode executar uma instância separada para cada
 solicitação. Eles devem ser escritos em linguagens suportadas. Os
 serviços também devem começar rapidamente; caso contrário, eles podem ser
