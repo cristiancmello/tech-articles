@@ -32,7 +32,7 @@ hosts. As máquinas hosts são comumente tratados como "animais de estimação".
 O diagrama a seguir mostra a estrutura desse padrão.
 
 <p align="center">
-    <img src="nginx-article-0.png"/>
+    <img src="nginx-article-0.png" width="500px"/>
 </p>
 
 Há um par de variantes deste padrão. Umas delas é que cada instância
@@ -103,7 +103,7 @@ iniciada usando essa imagem de VM. O diagrama a seguir mostrar a estrutura
 desse padrão:
 
 <p align="center">
-    <img src="nginx-article-1.png"/>
+    <img src="nginx-article-1.png" width="500px"/>
 </p>
 
 * Essa é a principal abordagem usada pela Netflix para implantar seu
@@ -181,7 +181,7 @@ E/S.
 O diagrama a seguirmostrar a estrutura desse padrão:
 
 <p align="center">
-    <img src="nginx-article-2.png"/>
+    <img src="nginx-article-2.png" width="500px"/>
 </p>
 
 * Para usar esse padrão, precisamos compactar o serviço como uma imagem de
