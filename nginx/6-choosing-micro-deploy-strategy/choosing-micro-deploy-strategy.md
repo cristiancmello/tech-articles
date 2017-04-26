@@ -32,7 +32,7 @@ hosts. As máquinas hosts são comumente tratados como "animais de estimação".
 O diagrama a seguir mostra a estrutura desse padrão.
 
 <p align="center">
-    <img src="..."/>
+    <img src="nginx-article-0.png"/>
 </p>
 
 Há um par de variantes deste padrão. Umas delas é que cada instância
@@ -103,7 +103,7 @@ iniciada usando essa imagem de VM. O diagrama a seguir mostrar a estrutura
 desse padrão:
 
 <p align="center">
-    <img src="..."/>
+    <img src="nginx-article-1.png"/>
 </p>
 
 * Essa é a principal abordagem usada pela Netflix para implantar seu
@@ -165,3 +165,129 @@ desvantagens:
     é de nossa responsabilidade a administração das VMs. Esta atividade 
     necessária e demorada acaba nos desviando do core da aplicação, isto é, 
     do que na real é preciso fazer.
+    
+### Instância de Serviço por Container Pattern
+* Cada instância de serviço é executada em seu próprio container.
+* **CONTAINER**: é um mecanismo de [virtualização a nível do sistema 
+operacional](https://en.wikipedia.org/wiki/Operating-system-level_virtualization).
+Um container consiste de um ou mais processos em execução num sandbox. Do
+ponto de vista dos processos, eles têm seu próprio namespace de porta e
+sistema de arquivos. Podemos limitar a memória de um container e recursos
+de CPU. Algumas implementações de container também têm limite de taxa de
+E/S.
+    - Exemplos de tecnologias: [Docker](https://www.docker.com/) e 
+    [Solaris Containers](https://en.wikipedia.org/wiki/Solaris_Containers)
+
+O diagrama a seguirmostrar a estrutura desse padrão:
+
+<p align="center">
+    <img src="nginx-article-2.png"/>
+</p>
+
+* Para usar esse padrão, precisamos compactar o serviço como uma imagem de
+container. Uma imagem de container é uma imagem de sistema de arquivos
+composta pelas aplicações e bibliotecas necessárias para executar o serviço.
+Algumas imagens de container consistem em um sistema de arquivos Linux
+completo. Outras são mais leves.
+    - Para implantar um serviço Java, por exemplo, temos que criar uma
+    imagem de container contendo o binário em Java, talvez um servidor
+    Apache Tomcat e a aplicação Java compilada.
+
+* Depois de termos empacotado o serviço como uma imagem de container, 
+então iniciaremos um ou mais containers. Normalmente, pode-se executar
+vários containers em cada host físico ou virtual.
+    - Podemos usar um **Gerenciador de Cluster**, como o **Kubernetes** ou
+    **Marathon** para gerenciar os containers;
+    - Um gerenciador de cluster trata os hosts como um conjunto de recursos.
+    Ele decide onde colocar cada container com base nos recursos exigidos
+    pelo mesmo e recursos disponíveis em cada host.
+
+O padrão de instância por Container Pattern tem vantagens e desvantagen:
+
+* **VANTAGENS**:
+    - Benefícios semelhantes aos das VMs;
+    - Isolam as instâncias de serviço umas das outras;
+    - Pode-se monitorar facilmente os recursos consumidos por cada container;
+    - Encapsulam a tecnologia usada para implementar os serviços;
+    - A API de gerenciamento de container também serve como API para gerenciar
+    os serviços;
+    - Ao contrário das VMs, os containers são mais leves. As imagens
+    normalmente são muito rápidas de se construir.
+
+* **DESVANTAGENS**:
+    - A infraestrutura de container não é tão amadurecida quando das VMs;
+    - A segurança deve ser redobrada, uma vez que os containers compartilham
+    o kernel do sistema operacional do host;
+    - Temos que ser responsáveis pelo levantamento pesado da administração
+    das imagens do container. Além disso, a menos que estejamos usando uma
+    solução de container hospedada, como a 
+    [Google Container Engine](https://cloud.google.com/container-engine/)
+    ou [Amazon EC2 Container Service](https://aws.amazon.com/pt/ecs/),
+    temos que administrar a infraestrutura de container e possivelmente a
+    infraestrutura de VM em que ela é executada.
+    - Além disso, os containers são frequentemente implementados em uma
+    infraestrutura que tem preços por VM. Consequentemente, como descrito
+    anteriormente, será provável que teremos que incorrer no custo extra
+    de "overprovisioning" (superdimensionamento das configurações 
+    de hardware) das VMs, a fim de lidar com picos de carga.
+
+* É curioso notar que a distinção entre containers e VMs é um pouco nebulosa.
+Como dito anteriormente, VMs da Boxfuse são rápidas de se construir e iniciar.
+    - Projeto [Intel Clear Containers](https://clearlinux.org/features/clear-containers):
+    projeto da Intel visando a criação de VMs leves;
+    - [Unikernels](https://en.wikipedia.org/wiki/Unikernel): tecnologia de 
+    sistemas baseados em espaço de endereçamento único construído usando
+    bibliotecas de sistemas operacionais.
+
+## Implantação Serverless (sem servidor)
+É um conceito de implantação mais novo e que cada vez tem se 
+tornado popular. Naturalmente, dispensa a questão de ter que se escolher
+o local de implementação dos serviços, geralmento feito em containers ou VMs.
+
+### AWS Lambda
+A [AWS Lambda](https://aws.amazon.com/pt/lambda/) é um exemplo
+de tecnologia Serverless (sem servidor). Suporta Java, Node.js, Python, 
+PHP, Ruby e etc. Para implantar um microserviço, teremos que empacotá-lo
+e o enviar para a AWS Lambda.
+    - Também podemos fornecer metadados, que entre outras coisas, especifica
+    o nome da função que é invocada para lidar com uma requisição (também
+    conhecida como evento);
+    - O AWS Lambda executa automaticamente instâncias suficientes do
+    nosso microserviço para processar requisições. Somos cobrados por
+    cada requisição com base no tempo gasto e na memória consumida;
+    - A noção de dispensar aspectos em relação à implantação é
+    muito atraente.
+
+* Fornece o conceito de **Função Lambda**, que é um serviço *stateless* (sem 
+estado). Geralmente, trata requisições invocando serviços da AWS.
+    - Exemplo: função Lambda é invocada quando uma imagem é carregada para um
+    bucket S3 da AWS, podendo inserir um item em uma tabela de imagens
+    do DynamoDB, além de publicar uma mensagem em um Kinesis stream para
+    para acionar o processamento de imagem. Uma função Lambda pode também
+    invocar serviços da Web de terceiros.
+
+* Há 4 maneiras de invocar uma Função Lambda:
+
+1. Diretamente, usando uma requisição da Web;
+2. Automaticamente, em resposta a um evento gerado por um serviço da AWS
+(como S3, DynamoDB, Kinesis ou algum serviço de email);
+3. Automaticamente, através de um AWS API Gateway para lidar com requisições
+HTTP de clientes da aplicação.
+4. Periodicamente, de acordo com uma tarefa *cron* (tarefa agendada).
+
+* A AWS Lambda é uma maneira conveniente de implantar microservices. O
+custo baseado em requisição significa que só pagaremos pelo trabalho
+realizado pelos serviços. Além disso, não somos responsáveis pela
+infraestrutura de TI, o que nos permite concentrarmos no desenvolvimento
+da nossa aplicação.
+
+* Existem algumas limitações significativas. Não se destina a ser usado para
+implantar serviços de longa duração de execução. As requisições devem ser
+concluídas em até 300 ms. Os serviços devem ser stateless, uma vez que,
+em teoria, a AWS Lambda pode executar uma instância separada para cada
+solicitação. Eles devem ser escritos em linguagens suportadas. Os
+serviços também devem começar rapidamente; caso contrário, eles podem ser
+expirados e encerrados.
+
+### StdLib
+O [Stdlib](https://stdlib.com/) é uma alternativa ao AWS Lambda.
