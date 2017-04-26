@@ -234,7 +234,7 @@ O padrão de instância por Container Pattern tem vantagens e desvantagen:
 * É curioso notar que a distinção entre containers e VMs é um pouco nebulosa.
 Como dito anteriormente, VMs da Boxfuse são rápidas de se construir e iniciar.
     - Projeto [Intel Clear Containers](https://clearlinux.org/features/clear-containers):
-    projeto da Intel visando a criação de VMs leves;
+    projeto da Intel visando à criação de VMs leves;
     - [Unikernels](https://en.wikipedia.org/wiki/Unikernel): tecnologia de 
     sistemas baseados em espaço de endereçamento único construído usando
     bibliotecas de sistemas operacionais.
