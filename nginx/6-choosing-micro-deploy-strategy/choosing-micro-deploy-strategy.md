@@ -92,8 +92,8 @@ Pattern:
 É outra forma de implantar os microserviços. Quando usamos esse padrão,
 executamos cada instância de serviço isoladamente em seu próprio host.
 Existem duas diferentes especializações deste padrão:
-    - Instância de Serviço por **Máquina Virtual (VM)**;
-    - Instância de Serviço por **Container**.
+- Instância de Serviço por **Máquina Virtual (VM)**;
+- Instância de Serviço por **Container**.
     
 ### Instância de Serviço por VM Pattern
 Quando usamos esse padrão, podemos empacotar cada serviço como uma imagem
