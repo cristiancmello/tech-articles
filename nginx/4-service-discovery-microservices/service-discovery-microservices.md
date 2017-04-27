@@ -8,7 +8,7 @@ aplicativo tradicional executado em hardware físico, os locais de rede das
 instâncias de serviço são relativamente estáticos.
 
 Entretanto, num aplicativo moderno de microservices baseado em nuvem, este é
-um problema muito mais difícil de resolver, como mostrado no diagrama a seguir.
+um problema muito mais difícil de se resolver, como mostrado no diagrama a seguir.
 
 <p align="center">
     <img src="nginx-article-0.png" width="600px"/>
@@ -17,7 +17,7 @@ um problema muito mais difícil de resolver, como mostrado no diagrama a seguir.
 Instâncias do serviço *Registry Client* são atribuídas com locais de rede
 dinamicamente. Além disso, o conjunto de instâncias de serviço é alterado
 dinamicamente por causa do dimensionamento automático, falhas e atualizações.
-Consequentemente, o código do cliente precisa usar algum mecanismo de 
+Por conseguinte, o código do cliente precisa usar algum mecanismo de 
 **descoberta de serviço** mais elaborado.
 
 Há **2 principais padrões de descoberta de serviço**:
@@ -39,16 +39,15 @@ O diagrama a seguir mostra a estrutura desse padrão.
     <img src="nginx-article-1.png" width="600px"/>
 </p>
 
-**O local de rede de uma instância de serviço é registrado como registro
-de serviço quando ele é iniciado**. Após o término da instância, o local
-de rede é removido do serviço de registro.
+**O local de rede de uma instância de serviço é registrado quando ele é iniciado**. 
+Após o término da instância, o local de rede é removido do Serviço de Registro.
 
 - **IMPORTANTE**: o registro da instância do serviço é normalmente
 atualizado periodicamente usando um **mecanismo de heartbeat**.
 
 - **Netflix OSS**: fornece um padrão de descoberta do lado cliente;
 
-- **Netflix Eureka**: é um serviço de registro. Fornece uma API REST
+- **Netflix Eureka**: é um Serviço de Registro. Fornece uma API REST
 para gerenciar o registro de instância de serviço e para consultar
 instâncias;
 
@@ -63,7 +62,7 @@ de carga inteligentes, específicas de aplicativos, como usar o hash de forma
 consistente.
 
 Um inconveniente significavo do padrão de descoberta do lado Cliente, é que ele
-acopla o cliente com o serviço de registro, forçando-nos a implementar a
+acopla o cliente com o Serviço de Registro, forçando-nos a implementar a
 lógica de descoberta de serviço do lado Cliente para cada linguagem de
 programação e estrutura usada pelos clientes do serviço.
 
@@ -87,8 +86,9 @@ tráfego externo da Internet. No entanto, também podemos usá-lo para
 balancear o tráfego interno numa **VPC** (Virtual Private Cloud). Um cliente
 faz requisições (HTTP ou TCP) através do ELB usando seu nome DNS. A carga
 ELB equilibra o tráfego entre um conjunto de instâncias do EC2 registradas
-ou recipientes do EC2. Não há um serviço de registro separado. Em vez disso,
-as instâncias EC2 e os containers ECS são registrados com o próprio ELB.
+ou containers do EC2. Não há um Serviço de Registro separado. Em vez disso,
+as instâncias EC2 e os containers ECS ([Amazon EC2 Container Service
+](https://aws.amazon.com/pt/ecs/)) são registrados com o próprio ELB.
 
 * Servidores HTTP e load balancers, como o NGINX Plus e NGINX também podem 
 ser usados como um balanceador de carga de descoberta do lado servidor.
@@ -128,13 +128,13 @@ e gerenciado.
     consistência**.
 
 ### Netflix Eureka
-É um exemplo de serviço de registro. Fornece uma API REST para registrar
+É um exemplo de Serviço de Registro. Fornece uma API REST para registrar
 e consultar instâncias de serviço. 
 
 * Uma instância de serviço se registra usado uma requisição **POST**;
 * A cada 30s, deve manter seu registro atualizado com uma requisição **PUT**;
 * Um registro é removido com a requisição **DELETE** ou pelo tempo
-de registro de instância;
+de registro da instância;
 * O cliente pode recuperar as instâncias de serviço registradas usando
 uma solicitação **HTTP GET**;
 
@@ -154,7 +154,7 @@ de alto desempenho amplamente utilizado para aplicações distribuídas.
 
 * **IMPORTANTE**: muitos sistemas, como o **Kubernetes**, **Marathon** e
 **AWS** não têm um serviço de registro explícito. Em vez disso, o mesmo
-é apenas uma parte da interna infra-estrutura.
+é apenas uma parte interna da infraestrutura.
 
 ## Opções do Serviço de Registro
 Há um par de maneiras diferentes de lidar com o registro e cancelamento do
@@ -186,7 +186,7 @@ controla o registro.
 
 O **Serviço Registrar** rastreia as alterações feitas ao conjunto de instâncias
 em execução, consultando o ambiente de implementação ou assinando eventos.
-Quando ele percebe uma instância de serviço disponível, registra-o com o 
+Quando ele percebe uma instância de serviço disponível, registra-o no 
 Serviço de Registro. O Serviço Registrar também retira o registro das
 instâncias de serviço encerradas. O diagrama abaixo mostrar a estrutura
 desse padrão.
@@ -195,15 +195,17 @@ desse padrão.
     <img src="nginx-article-4.png" width="700px"/>
 </p>
 
-* [Registrator](http://gliderlabs.github.io/registrator/latest/): um exemplo
-de um Serviço Registrar. **Registrar e retira automaticamente as instâncias
+* [Registrator](http://gliderlabs.github.io/registrator/latest/): é um exemplo
+de um Serviço Registrar. **Registra e retira automaticamente as instâncias
 de serviço que são implementadas como containers do Docker**. Suporta
-vários registros de serviços, incluindo o **Etcd** e **Consul**.
+vários Serviços de Registro, incluindo o **Etcd** e **Consul**.
 
 * O Serviço Registrar é um componente interno de ambientes de implementação.
 As **instâncias da AWS EC2 criadas num grupo de escalonamento automático podem
-ser registradas automaticamente com um ELB**. Os serviço do **Kubernetes**
-são automaticamente registrados e disponibilizados para descoberta.
+ser registradas automaticamente com um ELB**. 
+
+* Os serviços do **Kubernetes** são automaticamente registrados e disponibilizados 
+para descoberta.
 
 * **BENEFÍCIOS do Registro de Terceiros**: os serviços são dissociados do
 Serviço de Registro. Não precisamos implementar a lógica de registro de
@@ -212,5 +214,5 @@ desenvolvedores. Em vez disso, o registro da instância de serviço é
 tratado de forma centralizada dentro de um serviço dedicado.
 
 * **DESVANTAGENS do Registro de Terceiros**: a menos que seja incorporado ao
-ambiente de implementação, é outros componente de sistema altamente disponível
+ambiente de implementação, é outro componente de sistema altamente disponível
 que precisamos configurar e gerenciar.
