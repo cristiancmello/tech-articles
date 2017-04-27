@@ -41,7 +41,7 @@ do Scrum), a equipe de desenvolvimento implementa mais histórias
 de código. Após alguns anos, a aplicação se tornará um monstruoso monólito, 
 havendo-se muitas dependências, riscos de migração elevados e etc.
 
-Uma vez que a aplicação e tornou grande e complexa, a organização de 
+Uma vez que a aplicação se tornou grande e complexa, a organização de 
 desenvolvimento provavelmente estará cheia de atrasos e muito sacrifício. 
 Quaisquer tentativas de desenvolvimento ágil e entrega serão a um grande 
 custo. Entender o relacionamento entre as partes do sistema também será 
@@ -138,12 +138,14 @@ irão cobrir o API Gateway.
 ### Arquitetura de Microserviço e o Cubo da Escalabilidade
 O padrão de **Arquitetura de Microserviços** corresponde ao **eixo Y** 
 no **Cubo da Escalabilidade** (*Scale Cube*), que é um modelo 3D de
-escalabilidade do livro *The Art of Scalability*. Os outros eixos 
-de dimensionamento são escalonamento de **eixo X**, que consiste 
-em várias cópias idênticas do aplicativo por trás de um balanceador 
-de carga e o escalonamento de **eixo Z** (ou particionamento de 
-dados), onde um atributo da solicitação (como chave-primária) é usado para
-encaminhar a solicitação para um servidor específico.
+escalabilidade do livro *The Art of Scalability*, dos autores 
+Martin L. Abbott e Michael T. Fisher (2ª Ed., Addison-Wesley, 2015). 
+Os outros eixos de dimensionamento são escalonamento de **eixo X**, 
+que consiste em várias cópias idênticas do aplicativo por trás de 
+um balanceador de carga e o escalonamento de **eixo Z** (ou 
+particionamento de dados), onde um atributo da solicitação (como 
+chave-primária) é usado para encaminhar a solicitação para um servidor 
+específico.
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/1-intro-microservices/nginx-article-2.png" width="500" height="380">
@@ -212,7 +214,7 @@ Outras considerações:
 * Desenvolvedores são livres para escolher qualquer tecnologia, desde que 
 honre o contrato da API;
 * Como serviços são relativamente pequenos, torna-se possível reescrever 
-um serviço antigo usando a tecnologia atual.
+um serviço antigo usando a tecnologia atual;
 * Cada serviço pode ser implantado de forma independente;
 * É possível realizar a implantação contínua de maneira mais rápida.
 * **Cada serviço pode ser dimensionado de forma independente**. Isto 
@@ -221,7 +223,7 @@ melhor corresponda aos requisitos de um serviço.
 
 ## Os inconvenientes dos microserviços
 * *A Arquitetura de Microservices não é a solução para tudo*;
-* Uma das desvantagens é na ênfase excessiva no tamanho do serviço. Alguns 
+* Uma das desvantagens é na ênfase excessiva ao tamanho do serviço. Alguns 
 desenvolvedores dimensionam de modo a serem bem pequenos.
     * **Importante lembrar que os microserviços são um meio para o fim e não o
     objetivo principal**;
