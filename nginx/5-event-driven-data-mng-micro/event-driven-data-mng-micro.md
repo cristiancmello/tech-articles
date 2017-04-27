@@ -28,17 +28,17 @@ do serviço.
     ligeiramente acoplados, podendo evoluir independentemente um do outro;
     - Se vários serviços acessarem os mesmos dados, as atualizações de
     *schema* irão requerer atualizações coordenadas e demoradas para todos
-    os serviço.
+    os serviços.
 
 * Para piorar a situação, cada microservice pode usar diferentes tipos de
-Bancos de Dados (**abordagem de persistência poliglota**).
+Bancos de Dados (**abordagem de persistência Polyglot**).
     - Por exemplo, um serviço que armazena e consulta texto poderá usar
     uma tecnologia de Banco de Dados como o **ElasticSearch**;
     - Outro exemplo é um serviço que armazena dados de gráficos
     de mídias sociais. Provavelmente será utilizada o **Neo4j**.
 
 * Tendo-se uma arquitetura de Banco de Dados particionada, e ainda,
-beneficiando-se da abordagem de persistência poliglota, será possível
+beneficiando-se da abordagem de persistência Polyglot, será possível
 ter serviços fracamente acoplados, com melhor desempenho e escalabilidade.
 No entanto, isso acaba introduzindo novos desafios de gerenciamento
 de dados distribuídos.
@@ -74,7 +74,7 @@ Ele só pode usar a API fornecida pelo Serviço ao Cliente.
 ### Segundo Desafio
 Consiste em implementar consultas que recuperam dados de vários serviços.
 Por exemplo, vamos imaginar que a aplicação precisa exibir dados de cliente
-e seus pedios recentes. Se o Serviço de Pedidos fornecer uma API para
+e seus pedidos recentes. Se o Serviço de Pedidos fornecer uma API para
 recuperar pedidos de um cliente, então podemos recuperar esses dados usando
 associação ao lado do aplicativo, isto é, o front-end se encarregaria de
 associar os dados consultados em diferentes end-points.
@@ -98,7 +98,7 @@ abrangem vários serviços. Uma transação consiste numa série de etapas.
 Cada etapa consiste numa atualização de entidade de negócios por um
 microservice e na publicação do evento que aciona o próximo passo.
 
-* A seguir, uma sequência de diagramas mostrar como podemos usar a
+* A seguir, uma sequência de diagramas mostra como podemos usar a
 abordagem orientada a eventos para **verificar o crédito disponível
 ao se criar um pedido**.
     - **Message Broker**: meio pelo qual os microservices trocam
@@ -152,7 +152,7 @@ os eventos relevantes e atualiza a *view*.
 * Quando o Serviço de Atualização de Visualização de Pedidos de Cliente recebe
 um evento de Cliente ou Pedido, ele atualiza a *view* de Pedidos de Cliente.
     - Podemos implementar a *view* de Pedidos de Cliente usando um Banco de 
-    Dados de documentos, como o **MongoDB** e armazenar um documento para
+    Dados de documentos, como o **MongoDB**, e armazenar um documento para
     cada cliente. O Serviço de *view* de Consulta de Pedidos de Cliente
     processa pedidos de um cliente e de pedidos recentes consultando o
     os dados armazenados na *view* de Pedido de Cliente.
@@ -192,11 +192,11 @@ queremos fazer.
 ### Como publicar eventos usando transações locais
 Uma maneira de atingir atomicidade é que a aplicação publique eventos usando
 um **processo de etapas múltiplas envolvendo apenas transações locais**.
-O truque é ter uma tabela **EVENT**, que funciona como uma fila de mensagens,
-no Banco de Dados que armazena o estado das entidades de negócios.
+O truque é ter uma tabela **EVENT**, que funciona como uma fila de mensagens
+que armazena o estado das entidades de negócios.
 
 A aplicação inicia uma transação de Banco de Dados (local), atualiza o estado
-das entidades de negócios, insere um evento na tabela EVENT e confirma a
+das entidades de negócio, insere um evento na tabela EVENT e confirma a
 transação. Um thread ou processo de aplicação consulta a tabela EVENT,
 publica os eventos no Message Broker e usa uma transação local para marcar os
 eventos conforme publicados. O diagrama a seguir mostra o projeto.
@@ -210,25 +210,25 @@ de Pedido Criado** na tabela EVENT. O thread ou processo do **Event Publisher**
 consulta a tabela EVENT para eventos não publicados, publica os evento e, em
 seguida, atualiza a tabela EVENT para marcar os eventos conforme publicados.
 
-* **VANTAGENS**:
+* **Vantagens**:
     - Garante um evento é publicado cada atualização sem depender de transações
     distribuídas;
     - A aplicação publica eventos a nível de negócios, o que elimina a 
-    necessidade de inferir-los;
+    necessidade de inferir-los.
 
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - Potencialmente propensa a erros, pois o desenvolvedor deve se lembrar de
     publicar eventos;
     - Tem a limitação de ser mais desafiador para implementar em Bancos de Dados
-    NoSQL, devido suas capacidades limitadas de transação e consulta.
+    NoSQL, devido as suas capacidades limitadas de transação e consulta.
 
 ### Minerando um log de transações de Banco de Dados
-Outra forma de atingir a atomicidade sem transações distribuídas é que os
-eventos sejam publicados por um thread ou processo que minere a transação de
+Outra forma de atingir a atomicidade sem transações distribuídas é na
+publicação de eventos por um thread ou processo que minere a transação de
 Banco de Dados, o que resulta em alterações sendo registradas no log
 de transações do Banco de Dados. O thread/processo de Transaction Log Miner
 lê o log de transações e publica eventos para o Message Broker. O diagrama a 
-seguir mostrar o projeto.
+seguir mostra o projeto.
 
 <p align="center">
     <img src="nginx-article-6.png"/>
@@ -236,7 +236,7 @@ seguir mostrar o projeto.
 
 Exemplos de projetos que usam essa abordagem:
 
-* [LinkedIn Databus](https://github.com/linkedin/databus): O Databus
+* [LinkedIn Databus](https://github.com/linkedin/databus): o Databus
 extrai o log de transações Oracle e publica eventos correspondentes às
 alterações. O LinkedIn usa o Databus para manter diversos data stores
 derivados compatíveis com o sistema de registro;
@@ -244,17 +244,17 @@ derivados compatíveis com o sistema de registro;
 * [Mecanimo de Streams no AWS DynamoDB](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html):
 é um Banco de Dados NoSQL gerenciado. Um *stream* DynamoDB contém a sequência
 de alterações (criadas, atualizadas e excluídas) ordenadas pelo tempo feitas
-nos itens de uma tabela DynamoDB nas últimas 24h. Um aplicação pode ler
+nos itens de uma tabela DynamoDB nas últimas 24h. Uma aplicação pode ler
 essas alterações do *stream* e, por exemplo, publicá-las como eventos.
 
 Vantagens e Desvantagens da mineração de log de transações:
-* **VANTAGENS**:
+* **Vantagens**:
     - Garantir que um evento é publicado para cada atualização sem
     usar transações distribuídas;
     - Pode simplificar a aplicação separando a publicação de eventos da lógica
     de negócios da mesma.
 
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - O formato do log de transações é proprietário de cada Banco de Dados e
     pode até mudar entre as versões do Banco de Dados;
     - A engenharia reversa dos eventos de negócio de alto nível das 
@@ -264,7 +264,7 @@ Vantagens e Desvantagens da mineração de log de transações:
 ### Usando o Sourcing de eventos
 O fornecimento de eventos atinge atomicidade sem transações distribuídas usando
 uma abordagem radicalmente diferente, centrada em eventos para entidades de
-negócios persistentes. Em vez de armazenar o estado atual de um entidade, a
+negócio persistentes. Em vez de armazenar o estado atual de um entidade, a
 aplicação armazena uma sequência de eventos que mudam de estado. A aplicação
 reconstrói o estado atual de uma entidade ao reproduzir os eventos. Sempre
 que o estado de uma entidade de negócios é alterado, um novo evento é
@@ -276,7 +276,7 @@ Pedido como um exemplo. Num abordagem tradicional, cada pedido
 mapeia para uma linha numa tabela ORDER e para linhas em, por exemplo, uma
 tabela ORDER_LINE_ITEM. Porém, ao se utilizar o *sourcing* de eventos, 
 o Serviço de Pedidos armazena um Pedido na forma de seus eventos de mudança
-de estado: Criado, Aprovado, Enviado, Cancelado. Cada evento contém dados
+de estado: Criado, Aprovado, Enviado e Cancelado. Cada evento contém dados
 suficientes para reconstruir o estado do Pedido.
 
 <p align="center">
@@ -295,7 +295,7 @@ de microserviços baseada em eventos.
 
 Vantagens e Desvantagens do *sourcing* de eventos:
 
-* **VANTAGENS**:
+* **Vantagens**:
     - Resolve um dos principais problemas na implementação de uma arquitetura
     orientada a eventos e torna possível a publicação confiável de eventos
     sempre que o estado muda. Como resultado, resolve problemas de consistência
@@ -307,10 +307,10 @@ Vantagens e Desvantagens do *sourcing* de eventos:
     confiável das alterações feitas a uma entidade de negócios e torna possível
     implementar consultas temporais que determinam o estado de uma entidade
     em qualquer ponto no tempo. Outro grande benefício do *sourcing* de eventos
-    é que sua lógica de negócios consiste em entidades de negócios ligeiramente
+    é que sua lógica de negócios consiste em entidades de negócio ligeiramente
     acopladas que trocam eventos.
 
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - Estilo diferente e desconhecido de programação e por isso há uma curva
     de aprendizado. O armazenamento de eventos apenas suporta diretamente a
     pesquisa de entidades de negócios por chave primária. Devemos usar o 
