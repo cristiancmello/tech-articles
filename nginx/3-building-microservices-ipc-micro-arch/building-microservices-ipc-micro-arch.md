@@ -1,7 +1,7 @@
 # 3. Construindo Microservices: Comunicação entre Processos na Arquitetura de Microservices
 
-Em um aplicação monolítica, os componentes invocam uns aos outros através
-de chamadas de função ou de nível de linguagem. Em contraste, um aplicação
+Em uma aplicação monolítica, os componentes invocam uns aos outros através
+de chamadas de função ou à nível de linguagem. Em contraste, um aplicação
 baseada em microservices é um sistema distribuído executado em várias
 máquinas. Cada instâncias de serviço é tipicamente um processo. Para interagir
 com os serviços, podemos utilizar um **mecanismo de comunicação entre 
@@ -15,7 +15,7 @@ Futuramente, iremos abordar as tecnologias de IPC específicas. Neste artigo,
 serão discutidos problemas de design.
 
 ## Estilos de Interação
-É útil pensar sobre como os serviços interagem. Há ma variedade de estilos
+É útil pensar sobre a forma com que os serviços interagem. Há ma variedade de estilos
 de interação *Cliente* <=> *Servidor*.
 
 Os estilos de interação podem ser categorizados em 2 dimensões:
@@ -66,7 +66,7 @@ A tabela a seguir mostra os vários estilos de interação.
     aplicativo baseado em thread, o segmento que faz a solicitação pode
     até bloquear enquanto espera;
 
-    - **Notificação**: também conhecido como uma solicitação unidirecional,
+    - **Notificação**: também conhecido como solicitação unidirecional,
     um cliente envia uma solicitação para um serviço, mas nenhuma resposta
     é esperada ou enviada;
     
@@ -117,10 +117,10 @@ adotado. Se estivermos usando HTTP, por exemplo, a API poderá ser definida
 através de URLs e nos formatos de dados de requisição/resposta.
 
 ## APIs em evolução
-* API de um serviço muda invariavelmente ao longo do tempo. Em um aplicativo
+* A API de um serviço muda invariavelmente ao longo do tempo. Em um aplicativo
 monolítico, é geralmente simples mudar a API e atualizar todos os *callers*.
 
-* Numa aplicação de microserviços, há muitos problemas em atualizar a API
+* Numa aplicação de microserviços, há muitos problemas em se atualizar a API
 devido à compatibilidade que os consumidores dos serviços esperam.
 
 * Logo, **é importante ter uma estratégia para lidar com essas questões**.
@@ -130,7 +130,7 @@ devido à compatibilidade que os consumidores dos serviços esperam.
   extra.
 
   - **É importante usar um mecanismo de comunicação entre processos (IPC)
-  e um formato de mensagens que permitam evoluir facilmente as APIs**.
+  e um formato de mensagens que permita evoluir facilmente as APIs**.
   
   - No entanto, ocorrerá necessidades de se fazer alterações importantes
   e incompatíveis para uma API. **Como você não pode forçar os clientes a
@@ -149,7 +149,7 @@ devido à compatibilidade que os consumidores dos serviços esperam.
 * Há sempre um risco de falhas parciais na comunicação entre serviços, seja
 devido à manutenção, desativação ou sobrecarga.
 
-* Exemplo: considere a tela de *Detalhes de Produto*. Ele faz uso do
+* Exemplo: consideremos a tela de *Detalhes de Produto*. Ele faz uso do
 **Serviço de Recomendação** e imaginemos que esse serviço pare de
 funcionar.
   - Uma implementação ingênua de um cliente pode bloquear indefinidamente
@@ -303,11 +303,11 @@ processa a requisição e envia uma resposta.
 - O REST é um mecanismo IPC que quase sempre usa HTTP;
 - Conceito-chave em REST: **resource**, que normalmente representa o
   *objeto do negócio*, como Cliente ou Produto, ou *coleção de objetos
-  do negócios*.
+  do negócio*.
   - Utiliza verbos HTTP (GET, POST, PUT/PATCH, DELETE) para manipular
   resources.
 
-Diagrama abaixo mostrar uma das maneiras pelas quais o aplicativo de
+O diagrama abaixo mostra uma das maneiras pelas quais o aplicativo de
 táxi pode usar REST.
 
 <p align="center">
@@ -335,7 +335,7 @@ de maturidade útil para REST que consiste nos seguintes níveis:
 
 * **Nível 0**: os clientes de uma API de nível 0 invocam o serviço fazendo
 solicitações **POST** num único *end-point* de URL. Cada requisição
-especifica a ação a executar, o destino da ação (o objeto de negócios, 
+especifica a ação a executar, o destino da ação (o objeto de negócio, 
 por exemplo) e quaisquer parâmetros;
 
 * **Nível 1**: suporte ao conceito de **resources**. Para executar uma ação
@@ -345,13 +345,13 @@ executar e quaisquer parâmetros;
 * **Nível 2**: uso de **verbos HTTP** para executar ações. Notáveis:
   - **GET**: recuperar;
   - **POST**: criar;
-  - **PUT/PATCH**: atualização (comumente utilizado, mas não em definitivo);
+  - **PUT/PATCH**: atualização (comumente utilizado, mas não de forma absoluta);
   - **DELETE**: destruir.
 
 * **Nível 3**: baseado no princípio **HATEOAS** (Hypertext as Engine Of 
 Application State). A ideia básica é a representação de um **resource**
 e **links para ações permitidas**, o que faz com que o cliente não
-precise adivinhar quais ações podem ou não ser executadas em num
+precise adivinhar quais ações podem ou não ser executadas em um
 resource em seu estado atual.
 
 Há inúmeros benefícios ao se utilizar um protocolo baseado em HTTP:
@@ -365,7 +365,7 @@ ou o utilitário de linha de comando, como o **curl**;
 - Não requer um *intermediate broker*, o que simplifica a arquitetura do
 sistema.
 
-Há algumas desvantagens para se usar HTTP:
+Há algumas desvantagens ao se utilizar HTTP:
 - Ele suporta diretamente o estilo de interação requisição/resposta. Podemos
 usá-lo para notificações, mas o servidor sempre deve enviar uma resposta HTTP;
 
