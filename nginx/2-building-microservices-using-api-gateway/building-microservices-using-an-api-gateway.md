@@ -170,10 +170,10 @@ muito grande durante o desenvolvimento.
 * Uma forma mais eficiente é escrever código de API Gateway num estilo
 declarativo usando abordagem reativa (*Reactive Programming*). Exemplos:
 
-    - **Future** (em Scala): [site](http://docs.scala-lang.org/overviews/core/futures.html);
-    - **CompletableFuture class**: em Java 8. [site](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html);
-    - **Promise**: em JavaScript. [site](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise);
-    - **RectiveX**: [site](http://reactivex.io/);
+- [Future](http://docs.scala-lang.org/overviews/core/futures.html) (em Scala);
+- [CompletableFuture class](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html) (em Java 8);
+- [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (em JavaScript);
+- [RectiveX](http://reactivex.io/);
 
 ### Invocação de Serviço
 Um aplicativo baseado em microserviços é um sistema distribuído e deve usar
@@ -228,5 +228,5 @@ serviços de back-end, podendo-se fazer uso de caches.
 * Uma ótima biblioteca para lidar com esse cenário de tolerância a falhas
 é a [**Netflix Hystrix**](https://github.com/Netflix/Hystrix), fazendo uso
 da JVM. Alternativas: 
-    - [**Hystrix-Go**](https://github.com/afex/hystrix-go)(em Go);
-    - [**Phystrix**](https://github.com/upwork/phystrix)(em PHP).
+    - [**Hystrix-Go**](https://github.com/afex/hystrix-go) (em Go);
+    - [**Phystrix**](https://github.com/upwork/phystrix) (em PHP).
