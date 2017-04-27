@@ -3,8 +3,8 @@
 ## Motivações
 * A implantação (*deploy*) de uma aplicação monolítica significa executar
 cópias múltiplas e idênticas de uma única aplicação, geralmente grande;
-    - Normalmente, é fornecido N servidores (físicos ou virtuais), executando
-    M instâncias da aplicação em cada um deles;
+    - Normalmente, é fornecido *N* servidores (físicos ou virtuais), executando
+    *M* instâncias da aplicação em cada um deles;
 * A implantação de uma aplicação monolítica nem sempre é inteiramente direta,
 mas é muito mais simples do que implementar uma aplicação de microserviços;
 
@@ -51,7 +51,7 @@ processo ou grupo de processos.
 Vantagens e Desvantagens do padrão de Múltiplas Instâncias de Serviço por Host
 Pattern:
 
-* **VANTAGENS**:
+* **Vantagens**:
     - Uso de recursos é relativamente eficiente. Múltiplas instâncias de
     serviço compartilham o servidor e seu sistema operacional. É mais
     eficiente ainda se um processo ou grupo de processos executa várias
@@ -67,7 +67,7 @@ Pattern:
     processo de um container ou grupo de processos, podemos implantá-lo
     dinamicamente no container ou reiniciar o container.
     
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - Há pouco ou nenhum isolamento das instâncias de serviço, a menos que cada
     instância de serviço seja um processo separado. Embora possamos monitorar
     com precisão a utilização de recursos de cada instância de serviço, não é
@@ -130,7 +130,7 @@ e são mais seguras, pois expõem uma interface limitada para ataques.
 O modelo de instância de serviço por VM tem uma série de vantagens e 
 desvantagens:
 
-* **VANTAGENS**: 
+* **Vantagens**: 
     - Um grande benefício das VMs é que cada instância de serviço
     é executada em completo isolamento. Ele tem uma quantidade fixa de uso de CPU
     e memória e não pode "roubar" recursos de outros serviços;
@@ -140,7 +140,7 @@ desvantagens:
     preta. A API de gerenciamento da VM é a API de implantação do serviço.
     A implantação se torna muito mais simples e mais confiável.
 
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - Utilização de recursos menos eficiente. Cada instância de serviço tem a
     sobrecarga de uma VM inteira, incluindo o sistema operacional. Além disso,
     em um **IaaS** (Infraestrutura como Serviço), as VMs vêm em tamanhos fixos
@@ -204,7 +204,7 @@ vários containers em cada host físico ou virtual.
 
 O padrão de instância por Container Pattern tem vantagens e desvantagen:
 
-* **VANTAGENS**:
+* **Vantagens**:
     - Benefícios semelhantes aos das VMs;
     - Isolam as instâncias de serviço umas das outras;
     - Pode-se monitorar facilmente os recursos consumidos por cada container;
@@ -214,7 +214,7 @@ O padrão de instância por Container Pattern tem vantagens e desvantagen:
     - Ao contrário das VMs, os containers são mais leves. As imagens
     normalmente são muito rápidas de se construir.
 
-* **DESVANTAGENS**:
+* **Desvantagens**:
     - A infraestrutura de container não é tão amadurecida quando das VMs;
     - A segurança deve ser redobrada, uma vez que os containers compartilham
     o kernel do sistema operacional do host;
