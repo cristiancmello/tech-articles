@@ -301,8 +301,8 @@ Vantagens e Desvantagens do *sourcing* de eventos:
     sempre que o estado muda. Como resultado, resolve problemas de consistência
     de dados num arquitetura de microserviços;
     - A persistência de eventos em vez de objetos de domínio evita
-    principalmente o problema de **incompatibilidade de impedância objeto-
-    relacional**;
+    principalmente o problema de **incompatibilidade de impedância 
+    objeto-relacional**;
     - O fornecimento de eventos também oferece um registro de auditoria 100%
     confiável das alterações feitas a uma entidade de negócios e torna possível
     implementar consultas temporais que determinam o estado de uma entidade
