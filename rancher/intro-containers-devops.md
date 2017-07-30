@@ -8,12 +8,12 @@ No momento, precisaremos considerar **cinco** pontos importantes que devem
 ser incluídos na discussão sobre a aplicação de containers em processos
 de desenvolvimento.
 
-## 1. Definir infra-estrutura de suporte aos containers
-Quando temos poucos colaboradores experimentando containers, a criação e 
+## 1. Definir infraestrutura de suporte aos containers
+Quando temos poucos colaboradores experimentando containers, na criação e 
 armazenamento das imagens dos mesmos é de se esperar que sejam feitos 
 em ambiente de desenvolvimento local (desktop ou notebook). Quando
 a decisão é feita para utilizar containers em ambiente de produção,
-contudo, importantes decisões precisam ser seitas em torno da criação e
+contudo, importantes decisões precisam ser feitas em torno da criação e
 armazenamento de imagens do Docker.
 
 Antes de iniciar a jornada de implantação de ambiente de produção,
@@ -26,12 +26,13 @@ pergunte e responda as seguintes questões:
 
 - **Onde serão armazenadas nossas imagens Docker?**
     - Elas são publicamente acessíveis no [Docker Hub](https://hub.docker.com/)/[Docker Store](https://store.docker.com/)?
-    - Elas precisam ser mantidas em um repositório privado? Em caso afirmativo, onde serão hospedadas?
+    - Elas precisam ser mantidas em um repositório privado? 
+      Em caso afirmativo, onde serão hospedadas?
 
 - **Como lidaremos com o armazenamento de credenciais em cada imagem do Docker?
   Isso incluirá, mas não está limitado a:**
-    - Credenciais para acessar outros recursos do sistema
-    - API para sistemas externos, como para monitoramento
+    - Credenciais para acessar outros recursos do sistema;
+    - API para sistemas externos, como para monitoramento.
 
 - **O nosso ambiente de produção precisa mudar?**
     - Nosso ambiente atual pode suportar uma abordagem baseada em container de forma eficaz?
@@ -41,7 +42,7 @@ pergunte e responda as seguintes questões:
 ## 2. Não dispense nada do pipeline de Integração Contínua (CI)
 Um dos melhores recursos trazidos pelo Docker é do fato de um container
 poder funcionar de maneira mais razoável possível e equivalente
-tanto num notebook de um desenvolvedor junior quanto num servidor avançado
+tanto num notebook de um desenvolvedor júnior quanto num servidor avançado
 ou num datacenter. Portanto, as equipes de desenvolvimento podem ficar
 tentadas a assumir que o teste localizado é bom o suficiente e que há um
 valor limitado no uso de um pipeline de Integração Contínua (CI) completa.
@@ -61,12 +62,12 @@ processo que assegure que as etapas-chave não sejam esquecidas na "emoção" do
 deploy (aquela ansiedade mortífera 😬).
 
 Em um esforço para maximizar o tempo de atividade e a entrega de novas funcionalidades,
-a adoção de um processo como deploys [Blue Green](https://martinfowler.com/bliki/BlueGreenDeployment.html).
+a adoção de um processo como deploy [Blue Green](https://martinfowler.com/bliki/BlueGreenDeployment.html).
 é imperativa. A premissa, em relação aos containers, é coexistência de containers novos e
 antigos em ambiente de produção. O uso de balanceamento de carga dinâmico para deslocamento
 gradual e contínuo do tráfego de produção dos containers antigos para os novos, enquanto
-o monitoramento de problemas potenciais, permite um retorno relativamente fácil se os
-problemas forem observados nos novos containers.
+o monitoramento de problemas potenciais, permite um retorno relativamente fácil se problemas 
+forem observados nos novos containers.
 
 ## 4. Não relaxe no Teste de Integração
 Os recipientes podem ser os mesmos, independentemente do sistema host, mas, à medida
@@ -83,7 +84,7 @@ como **etapa final no processo de deploy**. Se estivermos usando o modelo de dep
 aos novos containers antes de configurar o proxy para incluí-los e, novamente,
 uma vez que o proxy foi direcionado para apontar para os novos containers.
 
-## 5. Certifique-se de que seu ambiente de produção seja escalável
+## 5. Certifiquemos de que o nosso ambiente de produção seja escalável
 A facilidade com que os containers podem ser criados e destruídos é um benefício
 definitivo dos containers, até que tenhamos que gerenciar esses containers em um
 ambiente de produção. A tentativa de fazer isso manualmente com mais de 1 ou 2 containers
@@ -99,7 +100,7 @@ Entretanto, pode criar **clusters de Kubernetes**, [Apache Mesos](http://mesos.a
 - [Juju](https://jujucharms.com/): semelhante ao Rancher, mas faz uso do LXC (outra tecnologia de container);
 - [OpenShift Origin](https://www.openshift.org/): traz por padrão o Kubernetes.
 
-Devemos, no entanto, tomar cuidado ao implementar, pois nem toda solução, por mais que seja aparente a eficiência,
+Devemos, no entanto, tomar cuidado ao implementar, pois nem toda solução, por mais que seja rápida e eficiente,
 vai nos livrar de falhas.
 
 # Referências
