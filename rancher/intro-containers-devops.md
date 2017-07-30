@@ -62,7 +62,7 @@ processo que assegure que as etapas-chave não sejam esquecidas na "emoção" do
 deploy (aquela ansiedade mortífera 😬).
 
 Em um esforço para maximizar o tempo de atividade e a entrega de novas funcionalidades,
-a adoção de um processo como deploy [Blue Green](https://martinfowler.com/bliki/BlueGreenDeployment.html).
+a adoção de um processo como deploy [Blue Green](https://martinfowler.com/bliki/BlueGreenDeployment.html)
 é imperativa. A premissa, em relação aos containers, é coexistência de containers novos e
 antigos em ambiente de produção. O uso de balanceamento de carga dinâmico para deslocamento
 gradual e contínuo do tráfego de produção dos containers antigos para os novos, enquanto
