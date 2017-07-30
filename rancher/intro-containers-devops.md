@@ -52,7 +52,55 @@ automatizado de testes e garantias, a equipe de desenvolvimento pode
 desenvolver uma maior confiança de que as mudanças no código foram testadas
 completamente.
 
+## 3. Siga um processo de Deploy (implantação)
+Na era de DevOps e CI, temos uma oportunidade de entregar correções de erros,
+atualizações e novos recursos para clientes de forma mais rápida e eficiente
+do que nunca. Como desenvolvedores, vivemos para resolver problemas e oferecer
+qualidade que as pessoas apreciam. No entanto, é importante definir e seguir um
+processo que assegure que as etapas-chave não sejam esquecidas na "emoção" do
+deploy (aquela ansiedade mortífera 😬).
 
+Em um esforço para maximizar o tempo de atividade e a entrega de novas funcionalidades,
+a adoção de um processo como deploys [Blue Green](https://martinfowler.com/bliki/BlueGreenDeployment.html).
+é imperativa. A premissa, em relação aos containers, é coexistência de containers novos e
+antigos em ambiente de produção. O uso de balanceamento de carga dinâmico para deslocamento
+gradual e contínuo do tráfego de produção dos containers antigos para os novos, enquanto
+o monitoramento de problemas potenciais, permite um retorno relativamente fácil se os
+problemas forem observados nos novos containers.
+
+## 4. Não relaxe no Teste de Integração
+Os recipientes podem ser os mesmos, independentemente do sistema host, mas, à medida
+que movemos containers de um ambiente para outro, corremos o risco de quebrar
+nossas dependendências externas, sejam eles conexões a serviços de terceiros,
+bancos de dados ou simplesmente diferenças na configuração de um ambiente para outro.
+Por este motivo, é imperativo que executemos testes de integração sempre que uma
+nova versão de um container seja implantada num novo ambiente ou quando mudanças num
+ambiente possam afetar as interações dos containers internamente.
+
+Os *testes de integração* devem ser executados como parte do processo de CI e novamente
+como **etapa final no processo de deploy**. Se estivermos usando o modelo de deploy
+*Blue Green* mencionado anteriormente, podemos executar testes de integração em relação
+aos novos containers antes de configurar o proxy para incluí-los e, novamente,
+uma vez que o proxy foi direcionado para apontar para os novos containers.
+
+## 5. Certifique-se de que seu ambiente de produção seja escalável
+A facilidade com que os containers podem ser criados e destruídos é um benefício
+definitivo dos containers, até que tenhamos que gerenciar esses containers em um
+ambiente de produção. A tentativa de fazer isso manualmente com mais de 1 ou 2 containers
+seria impraticável. Seria ainda mais impossível num cenário com diversos containers
+diferentes, dimensionados em diferentes níveis.
+
+Avaliar e decidir sobre uma solução de gerenciamento de container é uma das decisões
+mais importantes que teremos que tomar em todo o processo de DevOps. Há varias soluções,
+como:
+- [Rancher](http://rancher.com/): traz por padrão o **Cattle**, gerenciador de cluster de containers em Docker.
+Entretanto, pode criar **clusters de Kubernetes**, [Apache Mesos](http://mesos.apache.org/) e etc;
+- [Kubernetes](https://kubernetes.io/): gerenciador de cluster de container em Docker, desenvolvido pela Google;
+- [Juju](https://jujucharms.com/): semelhante ao Rancher, mas faz uso do LXC (outra tecnologia de container);
+- [OpenShift Origin](https://www.openshift.org/): traz por padrão o Kubernetes.
+
+Devemos, no entanto, tomar cuidado ao implementar, pois nem toda solução, por mais que seja aparente a eficiência,
+vai nos livrar de falhas.
 
 # Referências
 1. [Introducing Containers into Your DevOps Processes: Five Considerations](http://rancher.com/introducing-containers-devops-processes-five-considerations/)
