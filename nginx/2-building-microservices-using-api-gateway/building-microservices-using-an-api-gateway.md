@@ -89,7 +89,7 @@ responsabilidades, tais como:
 * e etc.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mrparty/tech-articles/master/nginx/2-building-microservices-using-api-gateway/nginx-img-3.png"/>
+    <img src="https://raw.githubusercontent.com/cristiancmello/tech-articles/master/nginx/2-building-microservices-using-api-gateway/nginx-img-3.png"/>
 </p>
 
 * Logo, o API Gateway é responsável pelo roteamento de requisições, composição
