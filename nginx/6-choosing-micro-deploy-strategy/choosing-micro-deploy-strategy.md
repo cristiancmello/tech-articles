@@ -246,17 +246,19 @@ o local de implementação dos serviços, geralmento feito em containers ou VMs.
 
 ### AWS Lambda
 A [AWS Lambda](https://aws.amazon.com/pt/lambda/) é um exemplo
-de tecnologia Serverless (sem servidor). Suporta Java, Node.js, Python, 
-PHP, Ruby e etc. Para implantar um microserviço, teremos que empacotá-lo
+de tecnologia Serverless (sem servidor). Suporta Java, Node.js, Python, Ruby e etc. Para implantar um microserviço, teremos que empacotá-lo
 e o enviar para a AWS Lambda.
-    - Também podemos fornecer metadados, que entre outras coisas, especifica
-    o nome da função que é invocada para lidar com uma requisição (também
-    conhecida como evento);
-    - O AWS Lambda executa automaticamente instâncias suficientes do
-    nosso microserviço para processar requisições. Somos cobrados por
-    cada requisição com base no tempo gasto e na memória consumida;
-    - A noção de dispensar aspectos em relação à implantação é
-    muito atraente.
+
+- Também podemos fornecer metadados, que entre outras coisas, especifica
+o nome da função que é invocada para lidar com uma requisição (também
+conhecida como evento);
+
+- O AWS Lambda executa automaticamente instâncias suficientes do
+nosso microserviço para processar requisições. Somos cobrados por
+cada requisição com base no tempo gasto e na memória consumida;
+
+- A noção de dispensar aspectos em relação à implantação é
+muito atraente.
 
 * Fornece o conceito de **Função Lambda**, que é um serviço *stateless* (sem 
 estado). Geralmente, trata requisições invocando serviços da AWS.
